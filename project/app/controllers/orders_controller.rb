@@ -65,6 +65,10 @@ k.each do |t|
 	    @orderitem.image=v.image
 	    @orderitem.title=v.title
 	    @orderitem.save
+	    
+	    @tmpblogc=Blog.find_by("id",v.blog_id)
+	    @tmpblogc.stock=@tmpblogc.stock-v.num
+	    @tmpblogc.save
 	
 	    tmpsum+=v.num*v.price
 	  end

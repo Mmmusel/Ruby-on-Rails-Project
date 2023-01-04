@@ -32,7 +32,7 @@ class CartsController < ApplicationController
 	  	
 	  else
 	    @cart=Cart.where({user_id: current_user.id,blog_id: params[:blog_id]}).first
-	  	
+	  	blog=Blog.find(@cart.blog_id)
 	  	@cart.num=@cart.num+1
 	  	@cart.save
 	    
