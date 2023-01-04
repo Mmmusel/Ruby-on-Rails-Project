@@ -1,0 +1,34 @@
+<div id="comment_<%= comment.id %>">
+  <p>
+  
+  <table>
+<tr>
+<td id="tdpadlinerr">
+  
+  <strong>
+    用户：<%= User.find_by("id":comment.user_id).username %>
+      
+</br> 发布时间：
+    <%= comment.created_at %>
+   
+
+  </strong><br/>
+<%= comment.content %>
+
+
+
+</td>
+<td >
+ <% if comment.user_id==session[:user_id] %>
+       
+   
+   <%= link_to "编辑评价",  edit_comment_path(comment) ,class: "linkpro",id: "linkpro" %> 
+ <% end %>
+
+</td>
+
+</tr>
+</table>
+  </p>
+</div>
+

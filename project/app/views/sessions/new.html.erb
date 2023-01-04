@@ -1,0 +1,45 @@
+<div class="blog_form">
+  <% if flash[:alert] %>
+    <p id="notice"><%= flash[:alert] %></p>
+  <% end %>
+
+<table>
+<tr>
+<td id="tdpad">
+<i class="fa fa-list-ul fa-2x " ></i>
+</td>
+<td>
+<h2>登录</h2>
+</td>
+</tr>
+</table>
+
+  <%= form_tag do %>
+    <fieldset>
+      <div>
+      
+        <label for="name">用户名：</label>
+        <%= text_field_tag :name,params[:name] %>
+      </div>
+      
+
+      
+      <div>
+        <label for="name">密码：</label>
+        <%= password_field_tag :password,params[:password] %>
+      </div>
+      
+
+
+      
+
+      <div>
+        <%= submit_tag "登录" ,class: "linkpro",id: "linkpro"%>
+      </div>
+    </fieldset>
+    
+    
+ 
+    
+  <% end %>
+</div>

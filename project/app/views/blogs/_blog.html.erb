@@ -1,0 +1,34 @@
+<div id="<%= dom_id blog %>">
+<div id="pic">
+  <%= image_tag(blog.image, :class => 'image',size: '220x180') if blog.image %>
+  
+  </div>
+  <div id="pic">
+  <p>
+    <strong>商家名:</strong>
+    <%= User.find_by("id":blog.user_id).username %>
+  </p>
+
+  <p>
+    <strong>商品名:</strong>
+    <%= blog.title %>
+  </p>
+
+  <p>
+    <strong>商品描述:</strong>
+    <%= blog.content %>
+  </p>
+  
+  <p>
+    <strong>价格:</strong>
+    <%= blog.price %>
+  </p>
+  
+  <p>
+    <strong>库存:</strong>
+    <%= blog.stock %>
+  </p>
+  
+</div>
+
+</div>

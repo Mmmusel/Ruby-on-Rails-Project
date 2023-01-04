@@ -1,0 +1,65 @@
+<p style="color: green"><%= notice %></p>
+
+
+<table>
+<tr>
+<td id="tdpad">
+<i class="fa fa-list-ul fa-3x " ></i>
+</td>
+<td>
+
+<h1>购物车</h1>
+</td>
+<td>
+
+<div style="height:55px;">
+
+<%= link_to "下单", new_order_path,class: "linkpro",id: "linkpro" %>
+
+</td>
+
+</tr>
+</table>
+
+
+
+<div id="carts">
+  <% @carts.each do |cart| %>
+  <% if cart.user_id == session[:user_id] %>
+  
+  
+  <div id="tdpadline">
+  <div id="pic">
+    <%= render cart.blog %>
+</div>
+  <div id="pic">
+    <strong>数量:</strong>
+    <%= cart.num %>
+ 
+    <strong>单品总价:</strong>
+    <%= cart.blog.price*cart.num %>
+ </div>
+  <div id="pic">
+
+
+
+  <%= link_to '查看商品', Blog.find_by("id",cart.blog_id), class: "linkpro",id: "linkpro" %>
+     <%= link_to '编辑数量', edit_cart_path(cart), class: "linkpro",id: "linkpro" %>
+
+</div>
+ </div>
+
+
+
+   
+ <% end %>
+
+
+<% end %>
+</div>
+
+
+
+<h1>商品总价：<%= @carts.find_all {|n| n.user_id == session[:user_id] }.inject(0.0){|sum,x| sum + x.num*x.blog.price } %></h1>
+
+

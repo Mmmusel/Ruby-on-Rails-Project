@@ -1,0 +1,48 @@
+<p style="color: green"><%= notice %></p>
+
+<%= render @order %>
+
+    <p>
+
+
+<div>
+
+<%= link_to "Back to orders", edit_order_path(@order) %></br>
+ 
+  <%= link_to "Back to orders", orders_path %></br>
+  
+  <% if current_user.usertype=='user' %>
+  
+  <% if @order.order_status=='未付款' %>
+   <%= link_to '确认付款',alterstatus_order_path(@order) %>
+   <% end %>
+   
+   <% if @order.order_status=='未发货' %>
+   <%= link_to '催发货',order_path(@order) %>
+   <% end %>
+   
+   <% if @order.order_status=='未收货' %>
+   <%= link_to '确认收货',alterstatus_order_path(@order) %>
+   <% end %>
+   <% else %>
+   
+   
+    <% if @order.order_status=='未付款' %>
+   <%= link_to '催付款',order_path(@order) %>
+   <% end %>
+   
+   <% if @order.order_status=='未发货' %>
+   <%= link_to '确认发货',alterstatus_order_path(@order)%>
+   <% end %>
+   
+   <% if @order.order_status=='未收货' %>
+   <%= link_to '催收货',order_path(@order) %>
+   <% end %>
+   
+   
+   
+   <% end %>
+   <% if @order.order_status!='已删除并退款' %>
+  <%= button_to "删除订单并退款", @order, method: :delete %>
+  <% end %>
+</div>

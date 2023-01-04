@@ -1,0 +1,44 @@
+<%= form_with(model: blog) do |form| %>
+  <% if blog.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(blog.errors.count, "error") %> prohibited this blog from being saved:</h2>
+
+      <ul>
+        <% blog.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+
+  <div>
+    <%= form.label "商品名", style: "display: block" %>
+    <%= form.text_field :title %>
+  </div>
+
+  <div>
+    <%= form.label "商品描述", style: "display: block" %>
+    <%= form.text_area :content %>
+  </div>
+  
+    <div>
+    <%= form.label "价格", style: "display: block" %>
+    <%= form.text_area :price %>
+  </div>
+  
+   <div>
+    <%= form.label "库存", style: "display: block" %>
+    <%= form.text_area :stock %>
+  </div>
+
+
+ <div>
+    <%= form.label "图片路径", style: "display: block" %>
+    <%= form.text_area :image %>
+  </div>
+</br>
+  <div>
+    <%= form.submit "提交修改" ,class: "linkpro",id: "linkpro"%>
+  </div>
+<% end %>

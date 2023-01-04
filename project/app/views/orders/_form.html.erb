@@ -1,0 +1,38 @@
+<%= form_with(model: order) do |form| %>
+  <% if order.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(order.errors.count, "error") %> prohibited this order from being saved:</h2>
+
+      <ul>
+        <% order.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+
+
+  <div>
+    <%= form.label "收货人姓名", style: "display: block" %>
+    <%= form.text_field :order_name %>
+  </div>
+
+  <div>
+    <%= form.label "收货人地址", style: "display: block" %>
+    <%= form.text_field :order_address %>
+  </div>
+
+  <div>
+    <%= form.label "收货人手机号", style: "display: block" %>
+    <%= form.text_field :order_mobile %>
+  </div>
+
+
+
+
+</br>
+  
+    <%= form.submit "下单",class: "linkpro",id: "linkpro"%>
+  
+<% end %>

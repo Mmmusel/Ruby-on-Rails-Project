@@ -1,0 +1,21 @@
+<table>
+<tr>
+<td id="tdpad">
+<i class="fa fa-list-ul fa-2x " ></i>
+</td>
+<td>
+<h2>编辑商品数量</h2>
+</td>
+<td>
+  <%= link_to "购物车", carts_path ,class: "linkpro",id: "linkpro"%> 
+</td>
+
+
+</tr>
+</table>
+
+<%= render "form", cart: @cart %>
+
+<br>
+
+  <%= button_to "移除商品", @cart, method: :delete ,class: "linkpro",id: "linkpro"%>

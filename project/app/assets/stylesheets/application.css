@@ -1,0 +1,113 @@
+#orders{
+
+width:900px;
+}
+#banner {
+background-color:#f6f6ed;
+border-bottom:3px solid #4D5174;
+
+width:100%;
+overflow: hidden;
+background-size:cover;
+}
+
+#tdpad {
+padding-right:20px;
+padding-left:10px
+}
+#left-pic {
+vertical-align: top;
+
+
+background-color:#DFE7EA;
+ height:100%;
+
+overflow: hidden;
+background-size:cover;
+}
+#right-pic {
+vertical-align: top;
+width:100%;
+
+background-color:#F8F8F8;
+ height:100%;
+
+overflow: hidden;
+background-size:cover;
+}
+#left-panel {
+  float: top;
+ height:100%;
+ width: 160px;/*设置按钮高度*/
+overflow: hidden;
+background-size:cover;
+
+  padding-left: 60px;
+   padding-top: 28px;
+  background-color:#DFE7EA
+}
+
+#main-panel {
+  float: left;
+
+  padding-left: 30px
+}
+
+#footer {
+  clear: both
+}
+#btn {
+color:white;/*字体颜色*/
+
+}
+
+#btn:hover {
+
+color:BLUE;/*字体颜色*/
+font-size: 29px;/*设置字体大小*/
+height: 60px;
+
+}
+#link {
+			height: 40px;/*设置按钮高度*/
+			width: 110px;
+			color:white;/*字体颜色*/
+			background-color:cornflowerblue;/*按钮背景颜色*/
+			border-radius: 5px;/*让按钮变得圆滑一点*/
+			border: 0;/*消去按钮丑的边框*/
+			margin: 0;
+			
+			outline: none;/*取消轮廓*/
+			font-family: Microsoft YaHei;/*字体设置为楷体*/
+			font-size: 22px;/*设置字体大小*/
+			text-align: center;/*字体居中*/
+			cursor: pointer;/*设置鼠标箭头手势*/
+			
+}
+
+#link:hover
+{
+height: 54px;
+width: 120px;
+	 background-color: #BCE6D8;
+	 padding-top:5px
+}
+
+
+
+/*
+
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS (and SCSS, if configured) file within this directory, lib/assets/stylesheets, or any plugin's
+ * vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any other CSS
+ * files in this directory. Styles in this file should be added after the last require_* statement.
+ * It is generally better to create a new file per style scope.
+ *
+ *= require_tree .
+ *= require_self
+ */

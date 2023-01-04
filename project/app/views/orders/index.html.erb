@@ -1,0 +1,55 @@
+<p style="color: green"><%= notice %></p>
+
+<table>
+<tr>
+<td id="tdpad">
+<i class="fa fa-list-ul fa-2x " ></i>
+</td>
+<td>
+<h2>历史订单</h2>
+</td>
+
+
+</tr>
+</table>
+
+<div id="orders">
+  <% @orders.each do |order| %>
+   
+     
+     <% if current_user.usertype=='user' %>
+     
+     <% if current_user.id==order.user_id %>
+  
+
+        <%= render order %>
+
+    
+    
+    
+    
+
+    </p>
+    
+    
+    
+
+    
+    
+    <% end %>
+    
+    <% else %>
+    <% if session[:user_id]==order.business_id %>
+  
+    <%= render order %>
+      
+    </p>
+    
+    <% end %>
+    <% end %>
+    
+    
+    
+  <% end %>
+</div>
+

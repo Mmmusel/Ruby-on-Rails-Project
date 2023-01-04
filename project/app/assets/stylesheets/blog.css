@@ -1,0 +1,119 @@
+#pic {
+  display:inline-block;
+  margin-right: 30px;
+  
+}
+#ltdpadlinep{
+margin:30px;
+padding-right:20px;
+padding-left:20px;
+border:2px solid black;
+width:900;
+padding:15px
+
+}
+#x{
+ display:inline-block;
+margin:30px;
+padding-right:20px;
+padding-left:20px;
+border:2px solid black;
+width:400px;
+padding:15px
+}
+
+#picp {
+  display:inline-block;
+  margin-left:30px;
+}
+#pureleft{
+float:left;
+
+}
+
+#left{
+float:left;
+margin-left:50px;
+padding-left:30px;
+border-left:1px solid black
+}
+#tdpadline{
+padding:20px;
+
+border:2px solid black;
+width:1200px;
+margin-bottom:20px
+
+
+
+}
+
+#tdpadlinerr{
+padding:20px;
+
+border:2px solid black;
+width:300px;
+margin-bottom:20px
+
+
+
+}
+
+
+
+#tdpadlinep{
+margin:30px;
+padding-right:20px;
+padding-left:20px;
+border:2px solid black;
+width:700px;
+padding:15px
+
+
+}
+
+#tdpadsmall {
+padding-right:10px;
+
+}
+#blog {
+  display:inline-block;
+  width:390px;
+  height:300px;
+  margin: 30px;
+  padding:30px;
+  border:3px solid #4D5174;
+}
+
+
+#linkpro {
+display:inline-block;
+			height: 40px;/*设置按钮高度*/
+			width: 110px;
+			color:white;/*字体颜色*/
+			background-color:#369F2D;/*按钮背景颜色*/
+			border-radius: 5px;/*让按钮变得圆滑一点*/
+			border: 0;/*消去按钮丑的边框*/
+			margin-right: 30px;
+			margin-left: 30px;
+			margin-top: 10px;
+			
+			outline: none;/*取消轮廓*/
+			font-family: Microsoft YaHei;/*字体设置为楷体*/
+			font-size: 22px;/*设置字体大小*/
+			text-align: center;/*字体居中*/
+			cursor: pointer;/*设置鼠标箭头手势*/
+			
+}
+#linkpro:hover
+{
+height: 50px;
+width: 120px;
+	 margin-top: 0px;
+	 padding-top:7px
+}
+
+#btnpro {
+color:white;/*字体颜色*/
+
+}

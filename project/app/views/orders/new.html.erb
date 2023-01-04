@@ -1,0 +1,21 @@
+<table>
+<tr>
+<td id="tdpad">
+<i class="fa fa-list-ul fa-2x " ></i>
+</td>
+<td>
+<h2>填写订单个人信息</h2>
+</td>
+<td>
+  <%= link_to "购物车", carts_path ,class: "linkpro",id: "linkpro"%> 
+</td>
+
+
+</tr>
+</table>
+
+<%= render "form", order: @order %>
+
+<br>
+
+

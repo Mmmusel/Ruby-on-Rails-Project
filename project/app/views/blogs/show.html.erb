@@ -1,0 +1,92 @@
+<p style="color: green"><%= notice %></p>
+
+<div id="pureleft">
+<table>
+<tr>
+<td id="tdpad">
+<i class="fa fa-list-ul fa-3x " ></i>
+</td>
+<td>
+<h1>商品详情</h1>
+</td>
+
+<td>
+<div id="linkpro"><%= link_to '返回', blogs_path,class: "btnpro",id: "btnpro" %></div></br>
+</td>
+
+</tr>
+</table>
+<table>
+<tr>
+<td><%= render @blog %></td>
+  <% if @blog.user_id==session[:user_id] %>
+  <td id="tdpadsmall">
+    <div id="linkpro"> <%= link_to '编辑商品', edit_blog_path(@blog), class: "btnpro",id: "btnpro"  %></div>
+</br></br>
+ <%= button_to "删除商品", @blog, method: :delete , class: "linkpro",id: "linkpro" %>
+   </td>
+    
+<% end %>
+
+
+
+ <% if current_user.usertype=='user' %>
+ <td>
+<%= button_to "加购物车", carts_path(:blog_id => @blog.id) , class: "linkpro",id: "linkpro"%></br>
+<% if Star.where({user_id: current_user.id,blog_id: @blog.id}).empty? %>
+<%= button_to "收藏商品", stars_path(:blog_id => @blog.id) , class: "linkpro",id: "linkpro"%>
+<% else %>
+
+<%=button_to '取消收藏', {:controller => :stars, :action => 'destroy', :id => Star.where({user_id: current_user.id,blog_id: @blog.id}).first.id}, :method => :delete  , class: "linkpro",id: "linkpro"  %>
+
+<% end %>
+</td>
+<% end %>
+
+</tr>
+</table>
+
+
+<table>
+<tr>
+<td id="tdpad">
+<i class="fa fa-list-ul fa-2x " ></i>
+</td>
+<td>
+<h2>发表评价</h2>
+</td>
+</tr>
+</table>
+
+
+
+
+  <%= form_for [@blog, Comment.new] do |f| %>
+  
+    <%= f.label :content, "New Comment" %> <br />
+    <%= f.text_area :content, :rows => 5 %>
+  
+  <p><%= f.submit "添加评价" ,class: "linkpro",id: "linkpro" %></p>
+<% end %>
+</div>
+
+
+<div id="left">
+<table>
+<tr>
+<td id="tdpad">
+<i class="fa fa-list-ul fa-2x " ></i>
+</td>
+<td>
+<h2>评价展示</h2>
+</td>
+</tr>
+</table>
+ <div id="comments">
+  <%= render :partial => @blog.comments %>
+  </div>
+
+
+</div>
+
+

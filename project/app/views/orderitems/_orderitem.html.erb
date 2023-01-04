@@ -1,0 +1,35 @@
+<div id="<%= dom_id orderitem %>">
+
+  <div id="x">
+<div id="pic">
+  <%= image_tag(orderitem.image, :class => 'image',size: '100x80') if orderitem.image %>
+  
+  </div>
+  <div id="pic" >
+
+ <p>
+    <strong>商品名:</strong>
+    <%= orderitem.title %>
+  
+</p>
+
+  <p>
+    <strong>价格:</strong>
+    <%= orderitem.price %>
+ </p>
+ </div>
+ <div id="pic" >
+  <p>
+    <strong>数量:</strong>
+    <%= orderitem.num%>
+    </p>
+<p>
+  <strong>总价:</strong>
+    <%= orderitem.num*orderitem.price  %>
+    </p>
+  </div>
+
+
+</div>
+
+</div>

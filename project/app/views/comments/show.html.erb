@@ -1,0 +1,23 @@
+<p style="color: green"><%= notice %></p>
+
+  <p>
+  <strong>
+    <%= User.find_by("id":@comment.user_id).username %>
+     Posted 
+
+    <%= time_ago_in_words(@comment.created_at) %>
+    <% if @comment.user_id==session[:user_id] %>
+       
+ <% end %>
+
+  </strong><br />
+<%= @comment.content %>
+  </p>
+
+<div>
+  <%= link_to "Edit this comment", edit_comment_path(@comment) %> |
+    <%= link_to "Back blog", Blog.find_by("id",@comment.blog_id) %>
+
+
+  <%= button_to "Destroy this comment", @comment, method: :delete %>
+</div>
