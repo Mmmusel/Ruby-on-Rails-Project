@@ -1,24 +1,53 @@
-# README
+# ruby大作业文档-20373363-李子涵
+## 一、实体说明
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+一共包含七个实体：
 
-Things you may want to cover:
+- 用户表：id, 用户名，密码，角色（买家/商家）
+- 产品表：Id, 商家id，名称，描述，价格，库存，图片路径
+- 购物车表：买家id，产品id，数量
+- 订单表：id，用户id，商家id，下单时间，订单状态，收货人姓名，收货地址，收货电话
+- 订单项表：产品id，订单id，下单时产品名，下单时产品单价，产品数量
+- 收藏夹表：买家id，产品id，添加时间
+- 商品评论表：id，用户id，商品id，评论内容，评价时间
 
-* Ruby version
+## 二、实现功能
 
-* System dependencies
+### （一）通过session控制器实现登陆注册功能
 
-* Configuration
+- 注册时区分商家和买家
+- 登录只用输入用户名和密码即可自动进入用户或者商家界面
+- 对于用户和商家的视图权限，存在区别控制
 
-* Database creation
+### （二）商家功能
 
-* Database initialization
+- 添加/编辑/查看/删除商家自己发布的产品
+- 查看其他商家发布的产品
 
-* How to run the test suite
+- 查看自己所有商品的订单列表
 
-* Services (job queues, cache servers, search engines, etc.)
+- 处理订单（发货/删除）
 
-* Deployment instructions
+### （三）买家功能
 
-* ...
+- 浏览产品列表 ，查看单品详情
+- 对商品发布评价
+- 查看所有人发布的所有评价，修改/删除自己的评价
+
+- 添加到购物车
+
+- 购物车内容，自动按照不同商家生成不同的订单
+
+- 查看自己的订单列表
+
+- 订单操作（付款，确认收货，取消订单）
+
+- 添加产品到收藏夹
+
+- 浏览收藏夹
+
+- 将产品从收藏夹内删除
+
+
+
+
