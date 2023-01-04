@@ -1,0 +1,21 @@
+<p style="color: green"><%= notice %></p>
+
+<h1>Listing blogs</h1>
+<div class=“blogs">
+<% @blogs.each do |blog| %>
+<div class=”blog”>
+   <%= link_to blog.title, blog %>,  Posted <%= time_ago_in_words blog.created_at %> ago.
+   <% if blog.user_id==session[:user_id] %>
+    | <%= link_to 'Edit', edit_blog_path(blog) %>
+  
+ <% end %>
+   <pre><%= blog.content %></pre>
+</div>
+<% end %>
+</div>
+
+<br>
+
+<%= link_to 'New Blog', new_blog_path %>
+
+

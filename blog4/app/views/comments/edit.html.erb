@@ -1,0 +1,15 @@
+<h1>Editing comment</h1>
+
+<%= render "form", comment: @comment %>
+
+
+
+
+
+<br>
+
+<div>
+ <%= button_to "Destroy this comment", @comment, method: :delete %> |
+  <%= link_to "Back blog", Blog.find_by("id",@comment.blog_id) %>
+  
+</div>

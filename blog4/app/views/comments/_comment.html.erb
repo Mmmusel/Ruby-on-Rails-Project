@@ -1,0 +1,18 @@
+<div id="comment_<%= comment.id %>">
+  <p>
+  <strong>
+    <%= User.find_by("id":comment.user_id).username %>
+     Posted 
+
+    <%= time_ago_in_words(comment.created_at) %>
+    <% if comment.user_id==session[:user_id] %>
+       | 
+   
+   <%= link_to "Show this comment", comment %> 
+ <% end %>
+
+  </strong><br />
+<%= comment.content %>
+  </p>
+</div>
+

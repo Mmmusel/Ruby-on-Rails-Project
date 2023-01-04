@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Blogs3</title>
+  <%= stylesheet_link_tag    "application", :media => "all" %>
+  <%= javascript_include_tag "application" %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+<div id="banner">
+<h1>Musel's Blogs4</h1>
+</div>
+<div id="left-panel">
+  <% if current_user %>
+  <%= current_user.username %> Logged in.<br/>
+  <%= link_to 'Logout', logout_path %>
+<% else %>
+  Please <%= link_to 'Login', login_path %></br>
+  Or <%= link_to "Register", new_user_path %>
+<% end %>
+
+</div>
+
+<div id="main-panel">
+<%= yield %>
+</div>
+
+<div id="footer">
+Copyright Musel &copy; 2022
+</div>
+
+</body>
+</html>
+
