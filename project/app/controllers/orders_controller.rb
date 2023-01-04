@@ -30,7 +30,7 @@ class OrdersController < ApplicationController
 
 # if Cart.select('*').where({'carts.user_id' => current_user.id}).joins("inner join  blogs on blogs.id=carts.blog_id").empty?
 
-m=Cart.select('carts.*,blogs.*,carts.user_id as cartuser,blogs.user_id as business_id').where({'carts.user_id' => current_user.id}).joins("inner join  blogs on blogs.id=carts.blog_id")
+m=Cart.select('carts.*,blogs.*,carts.user_id as cartuser,blogs.user_id as business_id,carts.blog_id as deleid').where({'carts.user_id' => current_user.id}).joins("inner join  blogs on blogs.id=carts.blog_id")
 
 puts m.first.image
 puts m.first.cartuser
@@ -66,7 +66,7 @@ k.each do |t|
 	    @orderitem.title=v.title
 	    @orderitem.save
 	    
-	    @tmpblogc=Blog.find_by("id",v.blog_id)
+	    @tmpblogc=Blog.find_by("id",v.deleid)
 	    @tmpblogc.stock=@tmpblogc.stock-v.num
 	    @tmpblogc.save
 	
@@ -147,24 +147,24 @@ if t=='未付款' then
 
   # DELETE /orders/1 or /orders/1.json
   def destroy
-    @order.destroy
-   # @order.order_status='已删除并退款'
-   # @order.save
+   # @order.destroy
+    @order.order_status='已删除并退款'
+    @order.save
 
-    respond_to do |format|
-      format.html { redirect_to orders_url, notice: "Order was successfully destroyed." }
-      format.json { head :no_content }
-    end
-    
   #  respond_to do |format|
-    #  if @order.save
-   #     format.html { redirect_to order_url(@order), notice: "Order was successfully updated." }
-   #     format.json { render :show, status: :ok, location: @order }
-   #   else
-   #     format.html { render :edit, status: :unprocessable_entity }
-   #     format.json { render json: @order.errors, status: :unprocessable_entity }
-  #    end
+  #    format.html { redirect_to orders_url, notice: "Order was successfully destroyed." }
+  #    format.json { head :no_content }
   #  end
+    
+    respond_to do |format|
+      if @order.save
+        format.html { redirect_to order_url(@order), notice: "Order was successfully updated." }
+        format.json { render :show, status: :ok, location: @order }
+      else
+        format.html { render :edit, status: :unprocessable_entity }
+        format.json { render json: @order.errors, status: :unprocessable_entity }
+      end
+    end
   end
 
   private
