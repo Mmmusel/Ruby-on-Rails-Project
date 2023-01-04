@@ -1,0 +1,15 @@
+<p style="color: green"><%= notice %></p>
+
+<%= render @category %>
+
+<div>
+  <%= link_to "Edit this category", edit_category_path(@category) %> |
+  <%= link_to "Back to categories", categories_path %>
+  <p>
+    <b>Recipes of this category:</b>
+    <%= (@category.recipes.collect { |recipe| recipe.title }).join(", ") %>
+  </p>
+
+  <%= button_to "Destroy this category", @category, method: :delete %>
+</div>
+~         

@@ -1,0 +1,766 @@
+  [1m[35m (0.2ms)[0m  [1m[35mDROP TABLE IF EXISTS "categories"[0m
+  [1m[35m (7.7ms)[0m  [1m[35mCREATE TABLE "categories" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[35m (0.1ms)[0m  [1m[35mDROP TABLE IF EXISTS "commands"[0m
+  [1m[35m (2.7ms)[0m  [1m[35mCREATE TABLE "commands" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[35m (0.1ms)[0m  [1m[35mDROP TABLE IF EXISTS "recipes"[0m
+  [1m[35m (2.3ms)[0m  [1m[35mCREATE TABLE "recipes" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "title" varchar, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL, "category_id" integer NOT NULL, "instructions" varchar, "commands" varchar)[0m
+  [1m[35m (2.4ms)[0m  [1m[35mCREATE INDEX "index_recipes_on_category_id" ON "recipes" ("category_id")[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = ON[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = OFF[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE TEMPORARY TABLE "arecipes" ("id" integer NOT NULL PRIMARY KEY, "title" varchar DEFAULT NULL, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL, "category_id" integer NOT NULL, "instructions" varchar DEFAULT NULL, "commands" varchar DEFAULT NULL)[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "tindex_arecipes_on_category_id" ON "arecipes" ("category_id")[0m
+  [1m[35m (0.1ms)[0m  [1m[32mINSERT INTO "arecipes" ("id","title","created_at","updated_at","category_id","instructions","commands")
+                     SELECT "id","title","created_at","updated_at","category_id","instructions","commands" FROM "recipes"[0m
+  [1m[35m (0.4ms)[0m  [1m[35mDROP TABLE "recipes"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE TABLE "recipes" ("id" integer NOT NULL PRIMARY KEY, "title" varchar DEFAULT NULL, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL, "category_id" integer NOT NULL, "instructions" varchar DEFAULT NULL, "commands" varchar DEFAULT NULL, CONSTRAINT "fk_rails_22f4e84158"
+FOREIGN KEY ("category_id")
+  REFERENCES "categories" ("id")
+)[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "index_recipes_on_category_id" ON "recipes" ("category_id")[0m
+  [1m[35m (0.0ms)[0m  [1m[32mINSERT INTO "recipes" ("id","title","created_at","updated_at","category_id","instructions","commands")
+                     SELECT "id","title","created_at","updated_at","category_id","instructions","commands" FROM "arecipes"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mDROP TABLE "arecipes"[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = 0[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = 1[0m
+  [1m[36mTRANSACTION (1.9ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (2.2ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" varchar NOT NULL PRIMARY KEY)[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (2.4ms)[0m  [1m[32mINSERT INTO "schema_migrations" (version) VALUES (20221030035047)[0m
+  [1m[35m (1.6ms)[0m  [1m[32mINSERT INTO "schema_migrations" (version) VALUES
+(20220930061345),
+(20221030004258),
+(20221030004532),
+(20221030011703),
+(20221030014103);
+
+[0m
+  [1m[35m (2.0ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" varchar NOT NULL PRIMARY KEY, "value" varchar, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.1ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? LIMIT ?[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mActiveRecord::InternalMetadata Create (0.4ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["key", "environment"], ["value", "test"], ["created_at", "2022-10-30 05:45:59.431287"], ["updated_at", "2022-10-30 05:45:59.431287"]]
+  [1m[36mTRANSACTION (1.7ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.1ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? LIMIT ?[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[36mActiveRecord::InternalMetadata Load (0.1ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? LIMIT ?[0m  [["key", "schema_sha1"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mActiveRecord::InternalMetadata Create (0.2ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["key", "schema_sha1"], ["value", "449b7570714c71a5603620fed493e3c845d3bbd8"], ["created_at", "2022-10-30 05:45:59.438165"], ["updated_at", "2022-10-30 05:45:59.438165"]]
+  [1m[36mTRANSACTION (1.7ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = ON[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = OFF[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mFixtures Load (0.4ms)[0m  [1m[31mDELETE FROM "categories";
+DELETE FROM "commands";
+DELETE FROM "recipes";
+INSERT INTO "categories" ("id", "name", "created_at", "updated_at") VALUES (980190962, 'MyString', '2022-10-30 05:45:59.518316', '2022-10-30 05:45:59.518316');
+INSERT INTO "categories" ("id", "name", "created_at", "updated_at") VALUES (298486374, 'MyString', '2022-10-30 05:45:59.518316', '2022-10-30 05:45:59.518316');
+INSERT INTO "commands" ("id", "name", "created_at", "updated_at") VALUES (980190962, 'MyString', '2022-10-30 05:45:59.521254', '2022-10-30 05:45:59.521254');
+INSERT INTO "commands" ("id", "name", "created_at", "updated_at") VALUES (298486374, 'MyString', '2022-10-30 05:45:59.521254', '2022-10-30 05:45:59.521254');
+INSERT INTO "recipes" ("id", "title", "created_at", "updated_at") VALUES (980190962, 'MyString', '2022-10-30 05:45:59.521903', '2022-10-30 05:45:59.521903');
+INSERT INTO "recipes" ("id", "title", "created_at", "updated_at") VALUES (298486374, 'MyString', '2022-10-30 05:45:59.521903', '2022-10-30 05:45:59.521903')[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mrollback transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = 0[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = 1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mPRAGMA foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = ON[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = OFF[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mFixtures Load (0.3ms)[0m  [1m[31mDELETE FROM "categories";
+DELETE FROM "commands";
+DELETE FROM "recipes";
+INSERT INTO "categories" ("id", "name", "created_at", "updated_at") VALUES (980190962, 'MyString', '2022-10-30 05:45:59.527997', '2022-10-30 05:45:59.527997');
+INSERT INTO "categories" ("id", "name", "created_at", "updated_at") VALUES (298486374, 'MyString', '2022-10-30 05:45:59.527997', '2022-10-30 05:45:59.527997');
+INSERT INTO "commands" ("id", "name", "created_at", "updated_at") VALUES (980190962, 'MyString', '2022-10-30 05:45:59.528057', '2022-10-30 05:45:59.528057');
+INSERT INTO "commands" ("id", "name", "created_at", "updated_at") VALUES (298486374, 'MyString', '2022-10-30 05:45:59.528057', '2022-10-30 05:45:59.528057');
+INSERT INTO "recipes" ("id", "title", "created_at", "updated_at") VALUES (980190962, 'MyString', '2022-10-30 05:45:59.528081', '2022-10-30 05:45:59.528081');
+INSERT INTO "recipes" ("id", "title", "created_at", "updated_at") VALUES (298486374, 'MyString', '2022-10-30 05:45:59.528081', '2022-10-30 05:45:59.528081')[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mrollback transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = 0[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = 1[0m
+  [1m[35m (0.2ms)[0m  [1m[35mPRAGMA foreign_keys[0m
+  [1m[35m (0.1ms)[0m  [1m[35mPRAGMA defer_foreign_keys[0m
+  [1m[35m (0.1ms)[0m  [1m[35mPRAGMA defer_foreign_keys = ON[0m
+  [1m[35m (0.4ms)[0m  [1m[35mPRAGMA foreign_keys = OFF[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mFixtures Load (0.4ms)[0m  [1m[31mDELETE FROM "categories";
+DELETE FROM "commands";
+DELETE FROM "recipes";
+INSERT INTO "categories" ("id", "name", "created_at", "updated_at") VALUES (980190962, 'MyString', '2022-10-30 05:45:59.541011', '2022-10-30 05:45:59.541011');
+INSERT INTO "categories" ("id", "name", "created_at", "updated_at") VALUES (298486374, 'MyString', '2022-10-30 05:45:59.541011', '2022-10-30 05:45:59.541011');
+INSERT INTO "commands" ("id", "name", "created_at", "updated_at") VALUES (980190962, 'MyString', '2022-10-30 05:45:59.541103', '2022-10-30 05:45:59.541103');
+INSERT INTO "commands" ("id", "name", "created_at", "updated_at") VALUES (298486374, 'MyString', '2022-10-30 05:45:59.541103', '2022-10-30 05:45:59.541103');
+INSERT INTO "recipes" ("id", "title", "created_at", "updated_at") VALUES (980190962, 'MyString', '2022-10-30 05:45:59.541145', '2022-10-30 05:45:59.541145');
+INSERT INTO "recipes" ("id", "title", "created_at", "updated_at") VALUES (298486374, 'MyString', '2022-10-30 05:45:59.541145', '2022-10-30 05:45:59.541145')[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mrollback transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = 0[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = 1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mPRAGMA foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = ON[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = OFF[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mFixtures Load (0.4ms)[0m  [1m[31mDELETE FROM "categories";
+DELETE FROM "commands";
+DELETE FROM "recipes";
+INSERT INTO "categories" ("id", "name", "created_at", "updated_at") VALUES (980190962, 'MyString', '2022-10-30 05:45:59.548781', '2022-10-30 05:45:59.548781');
+INSERT INTO "categories" ("id", "name", "created_at", "updated_at") VALUES (298486374, 'MyString', '2022-10-30 05:45:59.548781', '2022-10-30 05:45:59.548781');
+INSERT INTO "commands" ("id", "name", "created_at", "updated_at") VALUES (980190962, 'MyString', '2022-10-30 05:45:59.548949', '2022-10-30 05:45:59.548949');
+INSERT INTO "commands" ("id", "name", "created_at", "updated_at") VALUES (298486374, 'MyString', '2022-10-30 05:45:59.548949', '2022-10-30 05:45:59.548949');
+INSERT INTO "recipes" ("id", "title", "created_at", "updated_at") VALUES (980190962, 'MyString', '2022-10-30 05:45:59.548993', '2022-10-30 05:45:59.548993');
+INSERT INTO "recipes" ("id", "title", "created_at", "updated_at") VALUES (298486374, 'MyString', '2022-10-30 05:45:59.548993', '2022-10-30 05:45:59.548993')[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[31mrollback transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = 0[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = 1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mPRAGMA foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = ON[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = OFF[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mFixtures Load (0.3ms)[0m  [1m[31mDELETE FROM "categories";
+DELETE FROM "commands";
+DELETE FROM "recipes";
+INSERT INTO "categories" ("id", "name", "created_at", "updated_at") VALUES (980190962, 'MyString', '2022-10-30 05:45:59.554909', '2022-10-30 05:45:59.554909');
+INSERT INTO "categories" ("id", "name", "created_at", "updated_at") VALUES (298486374, 'MyString', '2022-10-30 05:45:59.554909', '2022-10-30 05:45:59.554909');
+INSERT INTO "commands" ("id", "name", "created_at", "updated_at") VALUES (980190962, 'MyString', '2022-10-30 05:45:59.555031', '2022-10-30 05:45:59.555031');
+INSERT INTO "commands" ("id", "name", "created_at", "updated_at") VALUES (298486374, 'MyString', '2022-10-30 05:45:59.555031', '2022-10-30 05:45:59.555031');
+INSERT INTO "recipes" ("id", "title", "created_at", "updated_at") VALUES (980190962, 'MyString', '2022-10-30 05:45:59.555062', '2022-10-30 05:45:59.555062');
+INSERT INTO "recipes" ("id", "title", "created_at", "updated_at") VALUES (298486374, 'MyString', '2022-10-30 05:45:59.555062', '2022-10-30 05:45:59.555062')[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[31mrollback transaction[0m
+  [1m[35m (0.2ms)[0m  [1m[35mPRAGMA defer_foreign_keys = 0[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = 1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mPRAGMA foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = ON[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = OFF[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mFixtures Load (0.3ms)[0m  [1m[31mDELETE FROM "categories";
+DELETE FROM "commands";
+DELETE FROM "recipes";
+INSERT INTO "categories" ("id", "name", "created_at", "updated_at") VALUES (980190962, 'MyString', '2022-10-30 05:45:59.559911', '2022-10-30 05:45:59.559911');
+INSERT INTO "categories" ("id", "name", "created_at", "updated_at") VALUES (298486374, 'MyString', '2022-10-30 05:45:59.559911', '2022-10-30 05:45:59.559911');
+INSERT INTO "commands" ("id", "name", "created_at", "updated_at") VALUES (980190962, 'MyString', '2022-10-30 05:45:59.559989', '2022-10-30 05:45:59.559989');
+INSERT INTO "commands" ("id", "name", "created_at", "updated_at") VALUES (298486374, 'MyString', '2022-10-30 05:45:59.559989', '2022-10-30 05:45:59.559989');
+INSERT INTO "recipes" ("id", "title", "created_at", "updated_at") VALUES (980190962, 'MyString', '2022-10-30 05:45:59.560020', '2022-10-30 05:45:59.560020');
+INSERT INTO "recipes" ("id", "title", "created_at", "updated_at") VALUES (298486374, 'MyString', '2022-10-30 05:45:59.560020', '2022-10-30 05:45:59.560020')[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mrollback transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = 0[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = 1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mPRAGMA foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = ON[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = OFF[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mFixtures Load (0.3ms)[0m  [1m[31mDELETE FROM "categories";
+DELETE FROM "commands";
+DELETE FROM "recipes";
+INSERT INTO "categories" ("id", "name", "created_at", "updated_at") VALUES (980190962, 'MyString', '2022-10-30 05:45:59.571169', '2022-10-30 05:45:59.571169');
+INSERT INTO "categories" ("id", "name", "created_at", "updated_at") VALUES (298486374, 'MyString', '2022-10-30 05:45:59.571169', '2022-10-30 05:45:59.571169');
+INSERT INTO "commands" ("id", "name", "created_at", "updated_at") VALUES (980190962, 'MyString', '2022-10-30 05:45:59.571311', '2022-10-30 05:45:59.571311');
+INSERT INTO "commands" ("id", "name", "created_at", "updated_at") VALUES (298486374, 'MyString', '2022-10-30 05:45:59.571311', '2022-10-30 05:45:59.571311');
+INSERT INTO "recipes" ("id", "title", "created_at", "updated_at") VALUES (980190962, 'MyString', '2022-10-30 05:45:59.571371', '2022-10-30 05:45:59.571371');
+INSERT INTO "recipes" ("id", "title", "created_at", "updated_at") VALUES (298486374, 'MyString', '2022-10-30 05:45:59.571371', '2022-10-30 05:45:59.571371')[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mrollback transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = 0[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = 1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mPRAGMA foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = ON[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = OFF[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mFixtures Load (0.3ms)[0m  [1m[31mDELETE FROM "categories";
+DELETE FROM "commands";
+DELETE FROM "recipes";
+INSERT INTO "categories" ("id", "name", "created_at", "updated_at") VALUES (980190962, 'MyString', '2022-10-30 05:45:59.640522', '2022-10-30 05:45:59.640522');
+INSERT INTO "categories" ("id", "name", "created_at", "updated_at") VALUES (298486374, 'MyString', '2022-10-30 05:45:59.640522', '2022-10-30 05:45:59.640522');
+INSERT INTO "commands" ("id", "name", "created_at", "updated_at") VALUES (980190962, 'MyString', '2022-10-30 05:45:59.640588', '2022-10-30 05:45:59.640588');
+INSERT INTO "commands" ("id", "name", "created_at", "updated_at") VALUES (298486374, 'MyString', '2022-10-30 05:45:59.640588', '2022-10-30 05:45:59.640588');
+INSERT INTO "recipes" ("id", "title", "created_at", "updated_at") VALUES (980190962, 'MyString', '2022-10-30 05:45:59.640615', '2022-10-30 05:45:59.640615');
+INSERT INTO "recipes" ("id", "title", "created_at", "updated_at") VALUES (298486374, 'MyString', '2022-10-30 05:45:59.640615', '2022-10-30 05:45:59.640615')[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mrollback transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = 0[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = 1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mPRAGMA foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = ON[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = OFF[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mFixtures Load (0.4ms)[0m  [1m[31mDELETE FROM "categories";
+DELETE FROM "commands";
+DELETE FROM "recipes";
+INSERT INTO "categories" ("id", "name", "created_at", "updated_at") VALUES (980190962, 'MyString', '2022-10-30 05:45:59.645649', '2022-10-30 05:45:59.645649');
+INSERT INTO "categories" ("id", "name", "created_at", "updated_at") VALUES (298486374, 'MyString', '2022-10-30 05:45:59.645649', '2022-10-30 05:45:59.645649');
+INSERT INTO "commands" ("id", "name", "created_at", "updated_at") VALUES (980190962, 'MyString', '2022-10-30 05:45:59.645714', '2022-10-30 05:45:59.645714');
+INSERT INTO "commands" ("id", "name", "created_at", "updated_at") VALUES (298486374, 'MyString', '2022-10-30 05:45:59.645714', '2022-10-30 05:45:59.645714');
+INSERT INTO "recipes" ("id", "title", "created_at", "updated_at") VALUES (980190962, 'MyString', '2022-10-30 05:45:59.645741', '2022-10-30 05:45:59.645741');
+INSERT INTO "recipes" ("id", "title", "created_at", "updated_at") VALUES (298486374, 'MyString', '2022-10-30 05:45:59.645741', '2022-10-30 05:45:59.645741')[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mrollback transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = 0[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = 1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mPRAGMA foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = ON[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = OFF[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mFixtures Load (0.4ms)[0m  [1m[31mDELETE FROM "categories";
+DELETE FROM "commands";
+DELETE FROM "recipes";
+INSERT INTO "categories" ("id", "name", "created_at", "updated_at") VALUES (980190962, 'MyString', '2022-10-30 05:45:59.651588', '2022-10-30 05:45:59.651588');
+INSERT INTO "categories" ("id", "name", "created_at", "updated_at") VALUES (298486374, 'MyString', '2022-10-30 05:45:59.651588', '2022-10-30 05:45:59.651588');
+INSERT INTO "commands" ("id", "name", "created_at", "updated_at") VALUES (980190962, 'MyString', '2022-10-30 05:45:59.651656', '2022-10-30 05:45:59.651656');
+INSERT INTO "commands" ("id", "name", "created_at", "updated_at") VALUES (298486374, 'MyString', '2022-10-30 05:45:59.651656', '2022-10-30 05:45:59.651656');
+INSERT INTO "recipes" ("id", "title", "created_at", "updated_at") VALUES (980190962, 'MyString', '2022-10-30 05:45:59.651683', '2022-10-30 05:45:59.651683');
+INSERT INTO "recipes" ("id", "title", "created_at", "updated_at") VALUES (298486374, 'MyString', '2022-10-30 05:45:59.651683', '2022-10-30 05:45:59.651683')[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mrollback transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = 0[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = 1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mPRAGMA foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = ON[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = OFF[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mFixtures Load (0.3ms)[0m  [1m[31mDELETE FROM "categories";
+DELETE FROM "commands";
+DELETE FROM "recipes";
+INSERT INTO "categories" ("id", "name", "created_at", "updated_at") VALUES (980190962, 'MyString', '2022-10-30 05:45:59.662114', '2022-10-30 05:45:59.662114');
+INSERT INTO "categories" ("id", "name", "created_at", "updated_at") VALUES (298486374, 'MyString', '2022-10-30 05:45:59.662114', '2022-10-30 05:45:59.662114');
+INSERT INTO "commands" ("id", "name", "created_at", "updated_at") VALUES (980190962, 'MyString', '2022-10-30 05:45:59.662203', '2022-10-30 05:45:59.662203');
+INSERT INTO "commands" ("id", "name", "created_at", "updated_at") VALUES (298486374, 'MyString', '2022-10-30 05:45:59.662203', '2022-10-30 05:45:59.662203');
+INSERT INTO "recipes" ("id", "title", "created_at", "updated_at") VALUES (980190962, 'MyString', '2022-10-30 05:45:59.662455', '2022-10-30 05:45:59.662455');
+INSERT INTO "recipes" ("id", "title", "created_at", "updated_at") VALUES (298486374, 'MyString', '2022-10-30 05:45:59.662455', '2022-10-30 05:45:59.662455')[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mrollback transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = 0[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = 1[0m
+  [1m[35m (0.2ms)[0m  [1m[35mPRAGMA foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = ON[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = OFF[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mFixtures Load (0.3ms)[0m  [1m[31mDELETE FROM "categories";
+DELETE FROM "commands";
+DELETE FROM "recipes";
+INSERT INTO "categories" ("id", "name", "created_at", "updated_at") VALUES (980190962, 'MyString', '2022-10-30 05:45:59.669184', '2022-10-30 05:45:59.669184');
+INSERT INTO "categories" ("id", "name", "created_at", "updated_at") VALUES (298486374, 'MyString', '2022-10-30 05:45:59.669184', '2022-10-30 05:45:59.669184');
+INSERT INTO "commands" ("id", "name", "created_at", "updated_at") VALUES (980190962, 'MyString', '2022-10-30 05:45:59.669416', '2022-10-30 05:45:59.669416');
+INSERT INTO "commands" ("id", "name", "created_at", "updated_at") VALUES (298486374, 'MyString', '2022-10-30 05:45:59.669416', '2022-10-30 05:45:59.669416');
+INSERT INTO "recipes" ("id", "title", "created_at", "updated_at") VALUES (980190962, 'MyString', '2022-10-30 05:45:59.669462', '2022-10-30 05:45:59.669462');
+INSERT INTO "recipes" ("id", "title", "created_at", "updated_at") VALUES (298486374, 'MyString', '2022-10-30 05:45:59.669462', '2022-10-30 05:45:59.669462')[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mrollback transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = 0[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = 1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mPRAGMA foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = ON[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = OFF[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mFixtures Load (0.2ms)[0m  [1m[31mDELETE FROM "categories";
+DELETE FROM "commands";
+DELETE FROM "recipes";
+INSERT INTO "categories" ("id", "name", "created_at", "updated_at") VALUES (980190962, 'MyString', '2022-10-30 05:45:59.676684', '2022-10-30 05:45:59.676684');
+INSERT INTO "categories" ("id", "name", "created_at", "updated_at") VALUES (298486374, 'MyString', '2022-10-30 05:45:59.676684', '2022-10-30 05:45:59.676684');
+INSERT INTO "commands" ("id", "name", "created_at", "updated_at") VALUES (980190962, 'MyString', '2022-10-30 05:45:59.676759', '2022-10-30 05:45:59.676759');
+INSERT INTO "commands" ("id", "name", "created_at", "updated_at") VALUES (298486374, 'MyString', '2022-10-30 05:45:59.676759', '2022-10-30 05:45:59.676759');
+INSERT INTO "recipes" ("id", "title", "created_at", "updated_at") VALUES (980190962, 'MyString', '2022-10-30 05:45:59.676787', '2022-10-30 05:45:59.676787');
+INSERT INTO "recipes" ("id", "title", "created_at", "updated_at") VALUES (298486374, 'MyString', '2022-10-30 05:45:59.676787', '2022-10-30 05:45:59.676787')[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mrollback transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = 0[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = 1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mPRAGMA foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = ON[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = OFF[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mFixtures Load (0.3ms)[0m  [1m[31mDELETE FROM "categories";
+DELETE FROM "commands";
+DELETE FROM "recipes";
+INSERT INTO "categories" ("id", "name", "created_at", "updated_at") VALUES (980190962, 'MyString', '2022-10-30 05:45:59.682145', '2022-10-30 05:45:59.682145');
+INSERT INTO "categories" ("id", "name", "created_at", "updated_at") VALUES (298486374, 'MyString', '2022-10-30 05:45:59.682145', '2022-10-30 05:45:59.682145');
+INSERT INTO "commands" ("id", "name", "created_at", "updated_at") VALUES (980190962, 'MyString', '2022-10-30 05:45:59.682259', '2022-10-30 05:45:59.682259');
+INSERT INTO "commands" ("id", "name", "created_at", "updated_at") VALUES (298486374, 'MyString', '2022-10-30 05:45:59.682259', '2022-10-30 05:45:59.682259');
+INSERT INTO "recipes" ("id", "title", "created_at", "updated_at") VALUES (980190962, 'MyString', '2022-10-30 05:45:59.682298', '2022-10-30 05:45:59.682298');
+INSERT INTO "recipes" ("id", "title", "created_at", "updated_at") VALUES (298486374, 'MyString', '2022-10-30 05:45:59.682298', '2022-10-30 05:45:59.682298')[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mrollback transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = 0[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = 1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mPRAGMA foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = ON[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = OFF[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mFixtures Load (0.4ms)[0m  [1m[31mDELETE FROM "categories";
+DELETE FROM "commands";
+DELETE FROM "recipes";
+INSERT INTO "categories" ("id", "name", "created_at", "updated_at") VALUES (980190962, 'MyString', '2022-10-30 05:45:59.687740', '2022-10-30 05:45:59.687740');
+INSERT INTO "categories" ("id", "name", "created_at", "updated_at") VALUES (298486374, 'MyString', '2022-10-30 05:45:59.687740', '2022-10-30 05:45:59.687740');
+INSERT INTO "commands" ("id", "name", "created_at", "updated_at") VALUES (980190962, 'MyString', '2022-10-30 05:45:59.687804', '2022-10-30 05:45:59.687804');
+INSERT INTO "commands" ("id", "name", "created_at", "updated_at") VALUES (298486374, 'MyString', '2022-10-30 05:45:59.687804', '2022-10-30 05:45:59.687804');
+INSERT INTO "recipes" ("id", "title", "created_at", "updated_at") VALUES (980190962, 'MyString', '2022-10-30 05:45:59.687827', '2022-10-30 05:45:59.687827');
+INSERT INTO "recipes" ("id", "title", "created_at", "updated_at") VALUES (298486374, 'MyString', '2022-10-30 05:45:59.687827', '2022-10-30 05:45:59.687827')[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mrollback transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = 0[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = 1[0m
+  [1m[35m (0.2ms)[0m  [1m[35mPRAGMA foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = ON[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = OFF[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mFixtures Load (0.5ms)[0m  [1m[31mDELETE FROM "categories";
+DELETE FROM "commands";
+DELETE FROM "recipes";
+INSERT INTO "categories" ("id", "name", "created_at", "updated_at") VALUES (980190962, 'MyString', '2022-10-30 05:45:59.699765', '2022-10-30 05:45:59.699765');
+INSERT INTO "categories" ("id", "name", "created_at", "updated_at") VALUES (298486374, 'MyString', '2022-10-30 05:45:59.699765', '2022-10-30 05:45:59.699765');
+INSERT INTO "commands" ("id", "name", "created_at", "updated_at") VALUES (980190962, 'MyString', '2022-10-30 05:45:59.699832', '2022-10-30 05:45:59.699832');
+INSERT INTO "commands" ("id", "name", "created_at", "updated_at") VALUES (298486374, 'MyString', '2022-10-30 05:45:59.699832', '2022-10-30 05:45:59.699832');
+INSERT INTO "recipes" ("id", "title", "created_at", "updated_at") VALUES (980190962, 'MyString', '2022-10-30 05:45:59.699860', '2022-10-30 05:45:59.699860');
+INSERT INTO "recipes" ("id", "title", "created_at", "updated_at") VALUES (298486374, 'MyString', '2022-10-30 05:45:59.699860', '2022-10-30 05:45:59.699860')[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[31mrollback transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[35mPRAGMA defer_foreign_keys = 0[0m
+  [1m[35m (0.1ms)[0m  [1m[35mPRAGMA foreign_keys = 1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mPRAGMA foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = ON[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = OFF[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mFixtures Load (0.5ms)[0m  [1m[31mDELETE FROM "categories";
+DELETE FROM "commands";
+DELETE FROM "recipes";
+INSERT INTO "categories" ("id", "name", "created_at", "updated_at") VALUES (980190962, 'MyString', '2022-10-30 05:45:59.707991', '2022-10-30 05:45:59.707991');
+INSERT INTO "categories" ("id", "name", "created_at", "updated_at") VALUES (298486374, 'MyString', '2022-10-30 05:45:59.707991', '2022-10-30 05:45:59.707991');
+INSERT INTO "commands" ("id", "name", "created_at", "updated_at") VALUES (980190962, 'MyString', '2022-10-30 05:45:59.708056', '2022-10-30 05:45:59.708056');
+INSERT INTO "commands" ("id", "name", "created_at", "updated_at") VALUES (298486374, 'MyString', '2022-10-30 05:45:59.708056', '2022-10-30 05:45:59.708056');
+INSERT INTO "recipes" ("id", "title", "created_at", "updated_at") VALUES (980190962, 'MyString', '2022-10-30 05:45:59.708080', '2022-10-30 05:45:59.708080');
+INSERT INTO "recipes" ("id", "title", "created_at", "updated_at") VALUES (298486374, 'MyString', '2022-10-30 05:45:59.708080', '2022-10-30 05:45:59.708080')[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mrollback transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = 0[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = 1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mPRAGMA foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = ON[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = OFF[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mFixtures Load (0.2ms)[0m  [1m[31mDELETE FROM "categories";
+DELETE FROM "commands";
+DELETE FROM "recipes";
+INSERT INTO "categories" ("id", "name", "created_at", "updated_at") VALUES (980190962, 'MyString', '2022-10-30 05:45:59.712521', '2022-10-30 05:45:59.712521');
+INSERT INTO "categories" ("id", "name", "created_at", "updated_at") VALUES (298486374, 'MyString', '2022-10-30 05:45:59.712521', '2022-10-30 05:45:59.712521');
+INSERT INTO "commands" ("id", "name", "created_at", "updated_at") VALUES (980190962, 'MyString', '2022-10-30 05:45:59.712580', '2022-10-30 05:45:59.712580');
+INSERT INTO "commands" ("id", "name", "created_at", "updated_at") VALUES (298486374, 'MyString', '2022-10-30 05:45:59.712580', '2022-10-30 05:45:59.712580');
+INSERT INTO "recipes" ("id", "title", "created_at", "updated_at") VALUES (980190962, 'MyString', '2022-10-30 05:45:59.712603', '2022-10-30 05:45:59.712603');
+INSERT INTO "recipes" ("id", "title", "created_at", "updated_at") VALUES (298486374, 'MyString', '2022-10-30 05:45:59.712603', '2022-10-30 05:45:59.712603')[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mrollback transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = 0[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = 1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mPRAGMA foreign_keys[0m
+  [1m[35m (0.1ms)[0m  [1m[35mPRAGMA defer_foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = ON[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = OFF[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mFixtures Load (0.3ms)[0m  [1m[31mDELETE FROM "categories";
+DELETE FROM "commands";
+DELETE FROM "recipes";
+INSERT INTO "categories" ("id", "name", "created_at", "updated_at") VALUES (980190962, 'MyString', '2022-10-30 05:45:59.717959', '2022-10-30 05:45:59.717959');
+INSERT INTO "categories" ("id", "name", "created_at", "updated_at") VALUES (298486374, 'MyString', '2022-10-30 05:45:59.717959', '2022-10-30 05:45:59.717959');
+INSERT INTO "commands" ("id", "name", "created_at", "updated_at") VALUES (980190962, 'MyString', '2022-10-30 05:45:59.718025', '2022-10-30 05:45:59.718025');
+INSERT INTO "commands" ("id", "name", "created_at", "updated_at") VALUES (298486374, 'MyString', '2022-10-30 05:45:59.718025', '2022-10-30 05:45:59.718025');
+INSERT INTO "recipes" ("id", "title", "created_at", "updated_at") VALUES (980190962, 'MyString', '2022-10-30 05:45:59.718051', '2022-10-30 05:45:59.718051');
+INSERT INTO "recipes" ("id", "title", "created_at", "updated_at") VALUES (298486374, 'MyString', '2022-10-30 05:45:59.718051', '2022-10-30 05:45:59.718051')[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mrollback transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = 0[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = 1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mPRAGMA foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = ON[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = OFF[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mFixtures Load (0.3ms)[0m  [1m[31mDELETE FROM "categories";
+DELETE FROM "commands";
+DELETE FROM "recipes";
+INSERT INTO "categories" ("id", "name", "created_at", "updated_at") VALUES (980190962, 'MyString', '2022-10-30 05:45:59.729376', '2022-10-30 05:45:59.729376');
+INSERT INTO "categories" ("id", "name", "created_at", "updated_at") VALUES (298486374, 'MyString', '2022-10-30 05:45:59.729376', '2022-10-30 05:45:59.729376');
+INSERT INTO "commands" ("id", "name", "created_at", "updated_at") VALUES (980190962, 'MyString', '2022-10-30 05:45:59.729461', '2022-10-30 05:45:59.729461');
+INSERT INTO "commands" ("id", "name", "created_at", "updated_at") VALUES (298486374, 'MyString', '2022-10-30 05:45:59.729461', '2022-10-30 05:45:59.729461');
+INSERT INTO "recipes" ("id", "title", "created_at", "updated_at") VALUES (980190962, 'MyString', '2022-10-30 05:45:59.729490', '2022-10-30 05:45:59.729490');
+INSERT INTO "recipes" ("id", "title", "created_at", "updated_at") VALUES (298486374, 'MyString', '2022-10-30 05:45:59.729490', '2022-10-30 05:45:59.729490')[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mrollback transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = 0[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = 1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mPRAGMA foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = ON[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = OFF[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mFixtures Load (0.3ms)[0m  [1m[31mDELETE FROM "categories";
+DELETE FROM "commands";
+DELETE FROM "recipes";
+INSERT INTO "categories" ("id", "name", "created_at", "updated_at") VALUES (980190962, 'MyString', '2022-10-30 05:45:59.736240', '2022-10-30 05:45:59.736240');
+INSERT INTO "categories" ("id", "name", "created_at", "updated_at") VALUES (298486374, 'MyString', '2022-10-30 05:45:59.736240', '2022-10-30 05:45:59.736240');
+INSERT INTO "commands" ("id", "name", "created_at", "updated_at") VALUES (980190962, 'MyString', '2022-10-30 05:45:59.736375', '2022-10-30 05:45:59.736375');
+INSERT INTO "commands" ("id", "name", "created_at", "updated_at") VALUES (298486374, 'MyString', '2022-10-30 05:45:59.736375', '2022-10-30 05:45:59.736375');
+INSERT INTO "recipes" ("id", "title", "created_at", "updated_at") VALUES (980190962, 'MyString', '2022-10-30 05:45:59.736407', '2022-10-30 05:45:59.736407');
+INSERT INTO "recipes" ("id", "title", "created_at", "updated_at") VALUES (298486374, 'MyString', '2022-10-30 05:45:59.736407', '2022-10-30 05:45:59.736407')[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mrollback transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = 0[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = 1[0m
+  [1m[36mActiveRecord::InternalMetadata Pluck (0.2ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? LIMIT ?[0m  [["key", "schema_sha1"], ["LIMIT", 1]]
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.1ms)[0m  [1m[35mPRAGMA foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = ON[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = OFF[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mFixtures Load (0.3ms)[0m  [1m[31mDELETE FROM "categories";
+DELETE FROM "commands";
+DELETE FROM "recipes";
+INSERT INTO "categories" ("id", "name", "created_at", "updated_at") VALUES (980190962, 'MyString', '2022-10-30 05:49:18.845016', '2022-10-30 05:49:18.845016');
+INSERT INTO "categories" ("id", "name", "created_at", "updated_at") VALUES (298486374, 'MyString', '2022-10-30 05:49:18.845016', '2022-10-30 05:49:18.845016');
+INSERT INTO "commands" ("id", "name", "created_at", "updated_at") VALUES (980190962, 'MyString', '2022-10-30 05:49:18.846302', '2022-10-30 05:49:18.846302');
+INSERT INTO "commands" ("id", "name", "created_at", "updated_at") VALUES (298486374, 'MyString', '2022-10-30 05:49:18.846302', '2022-10-30 05:49:18.846302');
+INSERT INTO "recipes" ("id", "title", "created_at", "updated_at") VALUES (980190962, 'MyString', '2022-10-30 05:49:18.848395', '2022-10-30 05:49:18.848395');
+INSERT INTO "recipes" ("id", "title", "created_at", "updated_at") VALUES (298486374, 'MyString', '2022-10-30 05:49:18.848395', '2022-10-30 05:49:18.848395')[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mrollback transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = 0[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = 1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mPRAGMA foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = ON[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = OFF[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mFixtures Load (0.5ms)[0m  [1m[31mDELETE FROM "categories";
+DELETE FROM "commands";
+DELETE FROM "recipes";
+INSERT INTO "categories" ("id", "name", "created_at", "updated_at") VALUES (980190962, 'MyString', '2022-10-30 05:49:18.854040', '2022-10-30 05:49:18.854040');
+INSERT INTO "categories" ("id", "name", "created_at", "updated_at") VALUES (298486374, 'MyString', '2022-10-30 05:49:18.854040', '2022-10-30 05:49:18.854040');
+INSERT INTO "commands" ("id", "name", "created_at", "updated_at") VALUES (980190962, 'MyString', '2022-10-30 05:49:18.854090', '2022-10-30 05:49:18.854090');
+INSERT INTO "commands" ("id", "name", "created_at", "updated_at") VALUES (298486374, 'MyString', '2022-10-30 05:49:18.854090', '2022-10-30 05:49:18.854090');
+INSERT INTO "recipes" ("id", "title", "created_at", "updated_at") VALUES (980190962, 'MyString', '2022-10-30 05:49:18.854111', '2022-10-30 05:49:18.854111');
+INSERT INTO "recipes" ("id", "title", "created_at", "updated_at") VALUES (298486374, 'MyString', '2022-10-30 05:49:18.854111', '2022-10-30 05:49:18.854111')[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mrollback transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[35mPRAGMA defer_foreign_keys = 0[0m
+  [1m[35m (0.1ms)[0m  [1m[35mPRAGMA foreign_keys = 1[0m
+  [1m[35m (0.2ms)[0m  [1m[35mPRAGMA foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = ON[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = OFF[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mFixtures Load (0.3ms)[0m  [1m[31mDELETE FROM "categories";
+DELETE FROM "commands";
+DELETE FROM "recipes";
+INSERT INTO "categories" ("id", "name", "created_at", "updated_at") VALUES (980190962, 'MyString', '2022-10-30 05:49:18.861527', '2022-10-30 05:49:18.861527');
+INSERT INTO "categories" ("id", "name", "created_at", "updated_at") VALUES (298486374, 'MyString', '2022-10-30 05:49:18.861527', '2022-10-30 05:49:18.861527');
+INSERT INTO "commands" ("id", "name", "created_at", "updated_at") VALUES (980190962, 'MyString', '2022-10-30 05:49:18.861603', '2022-10-30 05:49:18.861603');
+INSERT INTO "commands" ("id", "name", "created_at", "updated_at") VALUES (298486374, 'MyString', '2022-10-30 05:49:18.861603', '2022-10-30 05:49:18.861603');
+INSERT INTO "recipes" ("id", "title", "created_at", "updated_at") VALUES (980190962, 'MyString', '2022-10-30 05:49:18.861694', '2022-10-30 05:49:18.861694');
+INSERT INTO "recipes" ("id", "title", "created_at", "updated_at") VALUES (298486374, 'MyString', '2022-10-30 05:49:18.861694', '2022-10-30 05:49:18.861694')[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mrollback transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = 0[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = 1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mPRAGMA foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = ON[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = OFF[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mFixtures Load (0.3ms)[0m  [1m[31mDELETE FROM "categories";
+DELETE FROM "commands";
+DELETE FROM "recipes";
+INSERT INTO "categories" ("id", "name", "created_at", "updated_at") VALUES (980190962, 'MyString', '2022-10-30 05:49:18.869535', '2022-10-30 05:49:18.869535');
+INSERT INTO "categories" ("id", "name", "created_at", "updated_at") VALUES (298486374, 'MyString', '2022-10-30 05:49:18.869535', '2022-10-30 05:49:18.869535');
+INSERT INTO "commands" ("id", "name", "created_at", "updated_at") VALUES (980190962, 'MyString', '2022-10-30 05:49:18.869615', '2022-10-30 05:49:18.869615');
+INSERT INTO "commands" ("id", "name", "created_at", "updated_at") VALUES (298486374, 'MyString', '2022-10-30 05:49:18.869615', '2022-10-30 05:49:18.869615');
+INSERT INTO "recipes" ("id", "title", "created_at", "updated_at") VALUES (980190962, 'MyString', '2022-10-30 05:49:18.869639', '2022-10-30 05:49:18.869639');
+INSERT INTO "recipes" ("id", "title", "created_at", "updated_at") VALUES (298486374, 'MyString', '2022-10-30 05:49:18.869639', '2022-10-30 05:49:18.869639')[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mrollback transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = 0[0m
+  [1m[35m (0.1ms)[0m  [1m[35mPRAGMA foreign_keys = 1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mPRAGMA foreign_keys[0m
+  [1m[35m (0.1ms)[0m  [1m[35mPRAGMA defer_foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = ON[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = OFF[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mFixtures Load (0.3ms)[0m  [1m[31mDELETE FROM "categories";
+DELETE FROM "commands";
+DELETE FROM "recipes";
+INSERT INTO "categories" ("id", "name", "created_at", "updated_at") VALUES (980190962, 'MyString', '2022-10-30 05:49:18.877065', '2022-10-30 05:49:18.877065');
+INSERT INTO "categories" ("id", "name", "created_at", "updated_at") VALUES (298486374, 'MyString', '2022-10-30 05:49:18.877065', '2022-10-30 05:49:18.877065');
+INSERT INTO "commands" ("id", "name", "created_at", "updated_at") VALUES (980190962, 'MyString', '2022-10-30 05:49:18.877274', '2022-10-30 05:49:18.877274');
+INSERT INTO "commands" ("id", "name", "created_at", "updated_at") VALUES (298486374, 'MyString', '2022-10-30 05:49:18.877274', '2022-10-30 05:49:18.877274');
+INSERT INTO "recipes" ("id", "title", "created_at", "updated_at") VALUES (980190962, 'MyString', '2022-10-30 05:49:18.877332', '2022-10-30 05:49:18.877332');
+INSERT INTO "recipes" ("id", "title", "created_at", "updated_at") VALUES (298486374, 'MyString', '2022-10-30 05:49:18.877332', '2022-10-30 05:49:18.877332')[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mrollback transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = 0[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = 1[0m
+  [1m[35m (0.2ms)[0m  [1m[35mPRAGMA foreign_keys[0m
+  [1m[35m (0.1ms)[0m  [1m[35mPRAGMA defer_foreign_keys[0m
+  [1m[35m (0.1ms)[0m  [1m[35mPRAGMA defer_foreign_keys = ON[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = OFF[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mFixtures Load (0.4ms)[0m  [1m[31mDELETE FROM "categories";
+DELETE FROM "commands";
+DELETE FROM "recipes";
+INSERT INTO "categories" ("id", "name", "created_at", "updated_at") VALUES (980190962, 'MyString', '2022-10-30 05:49:18.892314', '2022-10-30 05:49:18.892314');
+INSERT INTO "categories" ("id", "name", "created_at", "updated_at") VALUES (298486374, 'MyString', '2022-10-30 05:49:18.892314', '2022-10-30 05:49:18.892314');
+INSERT INTO "commands" ("id", "name", "created_at", "updated_at") VALUES (980190962, 'MyString', '2022-10-30 05:49:18.892399', '2022-10-30 05:49:18.892399');
+INSERT INTO "commands" ("id", "name", "created_at", "updated_at") VALUES (298486374, 'MyString', '2022-10-30 05:49:18.892399', '2022-10-30 05:49:18.892399');
+INSERT INTO "recipes" ("id", "title", "created_at", "updated_at") VALUES (980190962, 'MyString', '2022-10-30 05:49:18.892428', '2022-10-30 05:49:18.892428');
+INSERT INTO "recipes" ("id", "title", "created_at", "updated_at") VALUES (298486374, 'MyString', '2022-10-30 05:49:18.892428', '2022-10-30 05:49:18.892428')[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mrollback transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[35mPRAGMA defer_foreign_keys = 0[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = 1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mPRAGMA foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys[0m
+  [1m[35m (0.1ms)[0m  [1m[35mPRAGMA defer_foreign_keys = ON[0m
+  [1m[35m (0.1ms)[0m  [1m[35mPRAGMA foreign_keys = OFF[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mFixtures Load (0.5ms)[0m  [1m[31mDELETE FROM "categories";
+DELETE FROM "commands";
+DELETE FROM "recipes";
+INSERT INTO "categories" ("id", "name", "created_at", "updated_at") VALUES (980190962, 'MyString', '2022-10-30 05:49:18.904172', '2022-10-30 05:49:18.904172');
+INSERT INTO "categories" ("id", "name", "created_at", "updated_at") VALUES (298486374, 'MyString', '2022-10-30 05:49:18.904172', '2022-10-30 05:49:18.904172');
+INSERT INTO "commands" ("id", "name", "created_at", "updated_at") VALUES (980190962, 'MyString', '2022-10-30 05:49:18.904247', '2022-10-30 05:49:18.904247');
+INSERT INTO "commands" ("id", "name", "created_at", "updated_at") VALUES (298486374, 'MyString', '2022-10-30 05:49:18.904247', '2022-10-30 05:49:18.904247');
+INSERT INTO "recipes" ("id", "title", "created_at", "updated_at") VALUES (980190962, 'MyString', '2022-10-30 05:49:18.904271', '2022-10-30 05:49:18.904271');
+INSERT INTO "recipes" ("id", "title", "created_at", "updated_at") VALUES (298486374, 'MyString', '2022-10-30 05:49:18.904271', '2022-10-30 05:49:18.904271')[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mrollback transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[35mPRAGMA defer_foreign_keys = 0[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = 1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mPRAGMA foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = ON[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = OFF[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mFixtures Load (0.3ms)[0m  [1m[31mDELETE FROM "categories";
+DELETE FROM "commands";
+DELETE FROM "recipes";
+INSERT INTO "categories" ("id", "name", "created_at", "updated_at") VALUES (980190962, 'MyString', '2022-10-30 05:49:18.912719', '2022-10-30 05:49:18.912719');
+INSERT INTO "categories" ("id", "name", "created_at", "updated_at") VALUES (298486374, 'MyString', '2022-10-30 05:49:18.912719', '2022-10-30 05:49:18.912719');
+INSERT INTO "commands" ("id", "name", "created_at", "updated_at") VALUES (980190962, 'MyString', '2022-10-30 05:49:18.912779', '2022-10-30 05:49:18.912779');
+INSERT INTO "commands" ("id", "name", "created_at", "updated_at") VALUES (298486374, 'MyString', '2022-10-30 05:49:18.912779', '2022-10-30 05:49:18.912779');
+INSERT INTO "recipes" ("id", "title", "created_at", "updated_at") VALUES (980190962, 'MyString', '2022-10-30 05:49:18.912801', '2022-10-30 05:49:18.912801');
+INSERT INTO "recipes" ("id", "title", "created_at", "updated_at") VALUES (298486374, 'MyString', '2022-10-30 05:49:18.912801', '2022-10-30 05:49:18.912801')[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mrollback transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = 0[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = 1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mPRAGMA foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = ON[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = OFF[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mFixtures Load (0.2ms)[0m  [1m[31mDELETE FROM "categories";
+DELETE FROM "commands";
+DELETE FROM "recipes";
+INSERT INTO "categories" ("id", "name", "created_at", "updated_at") VALUES (980190962, 'MyString', '2022-10-30 05:49:18.917386', '2022-10-30 05:49:18.917386');
+INSERT INTO "categories" ("id", "name", "created_at", "updated_at") VALUES (298486374, 'MyString', '2022-10-30 05:49:18.917386', '2022-10-30 05:49:18.917386');
+INSERT INTO "commands" ("id", "name", "created_at", "updated_at") VALUES (980190962, 'MyString', '2022-10-30 05:49:18.917462', '2022-10-30 05:49:18.917462');
+INSERT INTO "commands" ("id", "name", "created_at", "updated_at") VALUES (298486374, 'MyString', '2022-10-30 05:49:18.917462', '2022-10-30 05:49:18.917462');
+INSERT INTO "recipes" ("id", "title", "created_at", "updated_at") VALUES (980190962, 'MyString', '2022-10-30 05:49:18.917488', '2022-10-30 05:49:18.917488');
+INSERT INTO "recipes" ("id", "title", "created_at", "updated_at") VALUES (298486374, 'MyString', '2022-10-30 05:49:18.917488', '2022-10-30 05:49:18.917488')[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mrollback transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = 0[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = 1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mPRAGMA foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = ON[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = OFF[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mFixtures Load (0.3ms)[0m  [1m[31mDELETE FROM "categories";
+DELETE FROM "commands";
+DELETE FROM "recipes";
+INSERT INTO "categories" ("id", "name", "created_at", "updated_at") VALUES (980190962, 'MyString', '2022-10-30 05:49:18.921830', '2022-10-30 05:49:18.921830');
+INSERT INTO "categories" ("id", "name", "created_at", "updated_at") VALUES (298486374, 'MyString', '2022-10-30 05:49:18.921830', '2022-10-30 05:49:18.921830');
+INSERT INTO "commands" ("id", "name", "created_at", "updated_at") VALUES (980190962, 'MyString', '2022-10-30 05:49:18.921883', '2022-10-30 05:49:18.921883');
+INSERT INTO "commands" ("id", "name", "created_at", "updated_at") VALUES (298486374, 'MyString', '2022-10-30 05:49:18.921883', '2022-10-30 05:49:18.921883');
+INSERT INTO "recipes" ("id", "title", "created_at", "updated_at") VALUES (980190962, 'MyString', '2022-10-30 05:49:18.921905', '2022-10-30 05:49:18.921905');
+INSERT INTO "recipes" ("id", "title", "created_at", "updated_at") VALUES (298486374, 'MyString', '2022-10-30 05:49:18.921905', '2022-10-30 05:49:18.921905')[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mrollback transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = 0[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = 1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mPRAGMA foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = ON[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = OFF[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mFixtures Load (0.3ms)[0m  [1m[31mDELETE FROM "categories";
+DELETE FROM "commands";
+DELETE FROM "recipes";
+INSERT INTO "categories" ("id", "name", "created_at", "updated_at") VALUES (980190962, 'MyString', '2022-10-30 05:49:18.933626', '2022-10-30 05:49:18.933626');
+INSERT INTO "categories" ("id", "name", "created_at", "updated_at") VALUES (298486374, 'MyString', '2022-10-30 05:49:18.933626', '2022-10-30 05:49:18.933626');
+INSERT INTO "commands" ("id", "name", "created_at", "updated_at") VALUES (980190962, 'MyString', '2022-10-30 05:49:18.933913', '2022-10-30 05:49:18.933913');
+INSERT INTO "commands" ("id", "name", "created_at", "updated_at") VALUES (298486374, 'MyString', '2022-10-30 05:49:18.933913', '2022-10-30 05:49:18.933913');
+INSERT INTO "recipes" ("id", "title", "created_at", "updated_at") VALUES (980190962, 'MyString', '2022-10-30 05:49:18.933939', '2022-10-30 05:49:18.933939');
+INSERT INTO "recipes" ("id", "title", "created_at", "updated_at") VALUES (298486374, 'MyString', '2022-10-30 05:49:18.933939', '2022-10-30 05:49:18.933939')[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mrollback transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = 0[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = 1[0m
+  [1m[35m (1.5ms)[0m  [1m[35mPRAGMA foreign_keys[0m
+  [1m[35m (0.1ms)[0m  [1m[35mPRAGMA defer_foreign_keys[0m
+  [1m[35m (0.2ms)[0m  [1m[35mPRAGMA defer_foreign_keys = ON[0m
+  [1m[35m (0.1ms)[0m  [1m[35mPRAGMA foreign_keys = OFF[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mFixtures Load (0.3ms)[0m  [1m[31mDELETE FROM "categories";
+DELETE FROM "commands";
+DELETE FROM "recipes";
+INSERT INTO "categories" ("id", "name", "created_at", "updated_at") VALUES (980190962, 'MyString', '2022-10-30 05:49:18.938405', '2022-10-30 05:49:18.938405');
+INSERT INTO "categories" ("id", "name", "created_at", "updated_at") VALUES (298486374, 'MyString', '2022-10-30 05:49:18.938405', '2022-10-30 05:49:18.938405');
+INSERT INTO "commands" ("id", "name", "created_at", "updated_at") VALUES (980190962, 'MyString', '2022-10-30 05:49:18.938458', '2022-10-30 05:49:18.938458');
+INSERT INTO "commands" ("id", "name", "created_at", "updated_at") VALUES (298486374, 'MyString', '2022-10-30 05:49:18.938458', '2022-10-30 05:49:18.938458');
+INSERT INTO "recipes" ("id", "title", "created_at", "updated_at") VALUES (980190962, 'MyString', '2022-10-30 05:49:18.938479', '2022-10-30 05:49:18.938479');
+INSERT INTO "recipes" ("id", "title", "created_at", "updated_at") VALUES (298486374, 'MyString', '2022-10-30 05:49:18.938479', '2022-10-30 05:49:18.938479')[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mrollback transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[35mPRAGMA defer_foreign_keys = 0[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = 1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mPRAGMA foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = ON[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = OFF[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mFixtures Load (0.2ms)[0m  [1m[31mDELETE FROM "categories";
+DELETE FROM "commands";
+DELETE FROM "recipes";
+INSERT INTO "categories" ("id", "name", "created_at", "updated_at") VALUES (980190962, 'MyString', '2022-10-30 05:49:18.946635', '2022-10-30 05:49:18.946635');
+INSERT INTO "categories" ("id", "name", "created_at", "updated_at") VALUES (298486374, 'MyString', '2022-10-30 05:49:18.946635', '2022-10-30 05:49:18.946635');
+INSERT INTO "commands" ("id", "name", "created_at", "updated_at") VALUES (980190962, 'MyString', '2022-10-30 05:49:18.946696', '2022-10-30 05:49:18.946696');
+INSERT INTO "commands" ("id", "name", "created_at", "updated_at") VALUES (298486374, 'MyString', '2022-10-30 05:49:18.946696', '2022-10-30 05:49:18.946696');
+INSERT INTO "recipes" ("id", "title", "created_at", "updated_at") VALUES (980190962, 'MyString', '2022-10-30 05:49:18.946720', '2022-10-30 05:49:18.946720');
+INSERT INTO "recipes" ("id", "title", "created_at", "updated_at") VALUES (298486374, 'MyString', '2022-10-30 05:49:18.946720', '2022-10-30 05:49:18.946720')[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mrollback transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = 0[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = 1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mPRAGMA foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = ON[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = OFF[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mFixtures Load (0.2ms)[0m  [1m[31mDELETE FROM "categories";
+DELETE FROM "commands";
+DELETE FROM "recipes";
+INSERT INTO "categories" ("id", "name", "created_at", "updated_at") VALUES (980190962, 'MyString', '2022-10-30 05:49:18.951013', '2022-10-30 05:49:18.951013');
+INSERT INTO "categories" ("id", "name", "created_at", "updated_at") VALUES (298486374, 'MyString', '2022-10-30 05:49:18.951013', '2022-10-30 05:49:18.951013');
+INSERT INTO "commands" ("id", "name", "created_at", "updated_at") VALUES (980190962, 'MyString', '2022-10-30 05:49:18.951072', '2022-10-30 05:49:18.951072');
+INSERT INTO "commands" ("id", "name", "created_at", "updated_at") VALUES (298486374, 'MyString', '2022-10-30 05:49:18.951072', '2022-10-30 05:49:18.951072');
+INSERT INTO "recipes" ("id", "title", "created_at", "updated_at") VALUES (980190962, 'MyString', '2022-10-30 05:49:18.951112', '2022-10-30 05:49:18.951112');
+INSERT INTO "recipes" ("id", "title", "created_at", "updated_at") VALUES (298486374, 'MyString', '2022-10-30 05:49:18.951112', '2022-10-30 05:49:18.951112')[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mrollback transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = 0[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = 1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mPRAGMA foreign_keys[0m
+  [1m[35m (0.1ms)[0m  [1m[35mPRAGMA defer_foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = ON[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = OFF[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mFixtures Load (0.3ms)[0m  [1m[31mDELETE FROM "categories";
+DELETE FROM "commands";
+DELETE FROM "recipes";
+INSERT INTO "categories" ("id", "name", "created_at", "updated_at") VALUES (980190962, 'MyString', '2022-10-30 05:49:18.956112', '2022-10-30 05:49:18.956112');
+INSERT INTO "categories" ("id", "name", "created_at", "updated_at") VALUES (298486374, 'MyString', '2022-10-30 05:49:18.956112', '2022-10-30 05:49:18.956112');
+INSERT INTO "commands" ("id", "name", "created_at", "updated_at") VALUES (980190962, 'MyString', '2022-10-30 05:49:18.956166', '2022-10-30 05:49:18.956166');
+INSERT INTO "commands" ("id", "name", "created_at", "updated_at") VALUES (298486374, 'MyString', '2022-10-30 05:49:18.956166', '2022-10-30 05:49:18.956166');
+INSERT INTO "recipes" ("id", "title", "created_at", "updated_at") VALUES (980190962, 'MyString', '2022-10-30 05:49:18.956188', '2022-10-30 05:49:18.956188');
+INSERT INTO "recipes" ("id", "title", "created_at", "updated_at") VALUES (298486374, 'MyString', '2022-10-30 05:49:18.956188', '2022-10-30 05:49:18.956188')[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mrollback transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = 0[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = 1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mPRAGMA foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = ON[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = OFF[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mFixtures Load (0.3ms)[0m  [1m[31mDELETE FROM "categories";
+DELETE FROM "commands";
+DELETE FROM "recipes";
+INSERT INTO "categories" ("id", "name", "created_at", "updated_at") VALUES (980190962, 'MyString', '2022-10-30 05:49:18.966365', '2022-10-30 05:49:18.966365');
+INSERT INTO "categories" ("id", "name", "created_at", "updated_at") VALUES (298486374, 'MyString', '2022-10-30 05:49:18.966365', '2022-10-30 05:49:18.966365');
+INSERT INTO "commands" ("id", "name", "created_at", "updated_at") VALUES (980190962, 'MyString', '2022-10-30 05:49:18.966425', '2022-10-30 05:49:18.966425');
+INSERT INTO "commands" ("id", "name", "created_at", "updated_at") VALUES (298486374, 'MyString', '2022-10-30 05:49:18.966425', '2022-10-30 05:49:18.966425');
+INSERT INTO "recipes" ("id", "title", "created_at", "updated_at") VALUES (980190962, 'MyString', '2022-10-30 05:49:18.966449', '2022-10-30 05:49:18.966449');
+INSERT INTO "recipes" ("id", "title", "created_at", "updated_at") VALUES (298486374, 'MyString', '2022-10-30 05:49:18.966449', '2022-10-30 05:49:18.966449')[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mrollback transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = 0[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = 1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mPRAGMA foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = ON[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = OFF[0m
+  [1m[36mTRANSACTION (1.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mFixtures Load (0.8ms)[0m  [1m[31mDELETE FROM "categories";
+DELETE FROM "commands";
+DELETE FROM "recipes";
+INSERT INTO "categories" ("id", "name", "created_at", "updated_at") VALUES (980190962, 'MyString', '2022-10-30 05:49:18.970870', '2022-10-30 05:49:18.970870');
+INSERT INTO "categories" ("id", "name", "created_at", "updated_at") VALUES (298486374, 'MyString', '2022-10-30 05:49:18.970870', '2022-10-30 05:49:18.970870');
+INSERT INTO "commands" ("id", "name", "created_at", "updated_at") VALUES (980190962, 'MyString', '2022-10-30 05:49:18.970924', '2022-10-30 05:49:18.970924');
+INSERT INTO "commands" ("id", "name", "created_at", "updated_at") VALUES (298486374, 'MyString', '2022-10-30 05:49:18.970924', '2022-10-30 05:49:18.970924');
+INSERT INTO "recipes" ("id", "title", "created_at", "updated_at") VALUES (980190962, 'MyString', '2022-10-30 05:49:18.970948', '2022-10-30 05:49:18.970948');
+INSERT INTO "recipes" ("id", "title", "created_at", "updated_at") VALUES (298486374, 'MyString', '2022-10-30 05:49:18.970948', '2022-10-30 05:49:18.970948')[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[31mrollback transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[35mPRAGMA defer_foreign_keys = 0[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = 1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mPRAGMA foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = ON[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = OFF[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mFixtures Load (0.4ms)[0m  [1m[31mDELETE FROM "categories";
+DELETE FROM "commands";
+DELETE FROM "recipes";
+INSERT INTO "categories" ("id", "name", "created_at", "updated_at") VALUES (980190962, 'MyString', '2022-10-30 05:49:18.979881', '2022-10-30 05:49:18.979881');
+INSERT INTO "categories" ("id", "name", "created_at", "updated_at") VALUES (298486374, 'MyString', '2022-10-30 05:49:18.979881', '2022-10-30 05:49:18.979881');
+INSERT INTO "commands" ("id", "name", "created_at", "updated_at") VALUES (980190962, 'MyString', '2022-10-30 05:49:18.979941', '2022-10-30 05:49:18.979941');
+INSERT INTO "commands" ("id", "name", "created_at", "updated_at") VALUES (298486374, 'MyString', '2022-10-30 05:49:18.979941', '2022-10-30 05:49:18.979941');
+INSERT INTO "recipes" ("id", "title", "created_at", "updated_at") VALUES (980190962, 'MyString', '2022-10-30 05:49:18.979985', '2022-10-30 05:49:18.979985');
+INSERT INTO "recipes" ("id", "title", "created_at", "updated_at") VALUES (298486374, 'MyString', '2022-10-30 05:49:18.979985', '2022-10-30 05:49:18.979985')[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mrollback transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = 0[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = 1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mPRAGMA foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = ON[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = OFF[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mFixtures Load (0.2ms)[0m  [1m[31mDELETE FROM "categories";
+DELETE FROM "commands";
+DELETE FROM "recipes";
+INSERT INTO "categories" ("id", "name", "created_at", "updated_at") VALUES (980190962, 'MyString', '2022-10-30 05:49:18.984389', '2022-10-30 05:49:18.984389');
+INSERT INTO "categories" ("id", "name", "created_at", "updated_at") VALUES (298486374, 'MyString', '2022-10-30 05:49:18.984389', '2022-10-30 05:49:18.984389');
+INSERT INTO "commands" ("id", "name", "created_at", "updated_at") VALUES (980190962, 'MyString', '2022-10-30 05:49:18.984439', '2022-10-30 05:49:18.984439');
+INSERT INTO "commands" ("id", "name", "created_at", "updated_at") VALUES (298486374, 'MyString', '2022-10-30 05:49:18.984439', '2022-10-30 05:49:18.984439');
+INSERT INTO "recipes" ("id", "title", "created_at", "updated_at") VALUES (980190962, 'MyString', '2022-10-30 05:49:18.984460', '2022-10-30 05:49:18.984460');
+INSERT INTO "recipes" ("id", "title", "created_at", "updated_at") VALUES (298486374, 'MyString', '2022-10-30 05:49:18.984460', '2022-10-30 05:49:18.984460')[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mrollback transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = 0[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = 1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mPRAGMA foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = ON[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = OFF[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mFixtures Load (0.3ms)[0m  [1m[31mDELETE FROM "categories";
+DELETE FROM "commands";
+DELETE FROM "recipes";
+INSERT INTO "categories" ("id", "name", "created_at", "updated_at") VALUES (980190962, 'MyString', '2022-10-30 05:49:18.988595', '2022-10-30 05:49:18.988595');
+INSERT INTO "categories" ("id", "name", "created_at", "updated_at") VALUES (298486374, 'MyString', '2022-10-30 05:49:18.988595', '2022-10-30 05:49:18.988595');
+INSERT INTO "commands" ("id", "name", "created_at", "updated_at") VALUES (980190962, 'MyString', '2022-10-30 05:49:18.988665', '2022-10-30 05:49:18.988665');
+INSERT INTO "commands" ("id", "name", "created_at", "updated_at") VALUES (298486374, 'MyString', '2022-10-30 05:49:18.988665', '2022-10-30 05:49:18.988665');
+INSERT INTO "recipes" ("id", "title", "created_at", "updated_at") VALUES (980190962, 'MyString', '2022-10-30 05:49:18.988688', '2022-10-30 05:49:18.988688');
+INSERT INTO "recipes" ("id", "title", "created_at", "updated_at") VALUES (298486374, 'MyString', '2022-10-30 05:49:18.988688', '2022-10-30 05:49:18.988688')[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mrollback transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[35mPRAGMA defer_foreign_keys = 0[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = 1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mPRAGMA foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = ON[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = OFF[0m
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mFixtures Load (0.3ms)[0m  [1m[31mDELETE FROM "categories";
+DELETE FROM "commands";
+DELETE FROM "recipes";
+INSERT INTO "categories" ("id", "name", "created_at", "updated_at") VALUES (980190962, 'MyString', '2022-10-30 05:49:19.000437', '2022-10-30 05:49:19.000437');
+INSERT INTO "categories" ("id", "name", "created_at", "updated_at") VALUES (298486374, 'MyString', '2022-10-30 05:49:19.000437', '2022-10-30 05:49:19.000437');
+INSERT INTO "commands" ("id", "name", "created_at", "updated_at") VALUES (980190962, 'MyString', '2022-10-30 05:49:19.000499', '2022-10-30 05:49:19.000499');
+INSERT INTO "commands" ("id", "name", "created_at", "updated_at") VALUES (298486374, 'MyString', '2022-10-30 05:49:19.000499', '2022-10-30 05:49:19.000499');
+INSERT INTO "recipes" ("id", "title", "created_at", "updated_at") VALUES (980190962, 'MyString', '2022-10-30 05:49:19.000522', '2022-10-30 05:49:19.000522');
+INSERT INTO "recipes" ("id", "title", "created_at", "updated_at") VALUES (298486374, 'MyString', '2022-10-30 05:49:19.000522', '2022-10-30 05:49:19.000522')[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mrollback transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = 0[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = 1[0m
