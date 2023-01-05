@@ -25,7 +25,7 @@
 <td><%= render @blog %>
 </br>
   <strong>商品描述:</strong>
-    <%= blog.content %>
+    <%= @blog.content %>
   
 </td>
   <% if @blog.user_id==session[:user_id] %>
