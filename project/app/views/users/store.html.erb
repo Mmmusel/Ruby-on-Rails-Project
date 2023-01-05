@@ -21,7 +21,9 @@
 
 
 <div class="blogs" id="blogs">
-<% @blogs.each do |blog| %>
+<% Blogs.each do |blog| %>
+
+<% if blog.id==params[:format] %>
 <div class="blog" id="blog">
 
   <%= render blog %>
@@ -37,6 +39,9 @@
  <% end %>
    
 </div>
+
+<% end %>
+
 <% end %>
 </div>
 
