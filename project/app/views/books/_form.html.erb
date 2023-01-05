@@ -11,27 +11,23 @@
     </div>
   <% end %>
 
-  <div>
-    <%= form.label :user_id, style: "display: block" %>
-    <%= form.number_field :user_id %>
-  </div>
 
   <div>
-    <%= form.label :bookname, style: "display: block" %>
+    <%= form.label "收货人姓名", style: "display: block" %>
     <%= form.text_field :bookname %>
   </div>
 
   <div>
-    <%= form.label :bookaddress, style: "display: block" %>
+    <%= form.label "收货人地址", style: "display: block" %>
     <%= form.text_field :bookaddress %>
   </div>
 
   <div>
-    <%= form.label :bookmobile, style: "display: block" %>
+    <%= form.label "收货人手机号", style: "display: block" %>
     <%= form.text_field :bookmobile %>
   </div>
 
   <div>
-    <%= form.submit %>
+    <%= form.submit "提交编辑",class: "linkpro",id: "linkpro" %>
   </div>
 <% end %>
