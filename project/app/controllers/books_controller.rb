@@ -112,7 +112,7 @@ end
   # POST /books or /books.json
   def create
     @book = Book.new(book_params)
-
+    @book.user=current_user
     respond_to do |format|
       if @book.save
         format.html { redirect_to user_url(current_user),notice: "Book was successfully created." }
