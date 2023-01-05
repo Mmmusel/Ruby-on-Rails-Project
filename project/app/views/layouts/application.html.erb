@@ -14,7 +14,7 @@
 <table>
 <tr>
 <td id="tdpad">
-<i class="fa fa-shopping-cart fa-4x" ></i>
+<i class="fa fa-line-chart fa-4x" ></i>
 </td>
 <td>
   <% if current_user %>
@@ -51,14 +51,14 @@
   <div id="link"><i class="fa fa-shopping-cart fa-1.5x" >&nbsp;</i><%= link_to '购物车', carts_path,class: "btn",id: "btn" %></div>
     <br/>
     
-   <div id="link"><i class="fa fa-star-o fa-1.5x" >&nbsp;</i> <%= link_to '收藏夹', stars_path,class: "btn",id: "btn" %></div></br>
+   <div id="link"><i class="fa fa-star fa-1.5x" >&nbsp;</i> <%= link_to '收藏夹', stars_path,class: "btn",id: "btn" %></div></br>
     <% end %>
 
     
     
     <div id="link"><i class="fa fa-newspaper-o fa-1.5x" >&nbsp;</i><%= link_to '查订单', orders_path,class: "btn",id: "btn" %></div></br>
      
-  <div id="link"><i class="fa fa-user-times fa-1.5x" >&nbsp;</i><%= link_to '退出', logout_path,class: "btn",id: "btn" %></div>
+  <div id="link"><i class="fa fa-sign-out fa-1.5x" >&nbsp;</i><%= link_to '退出', logout_path,class: "btn",id: "btn" %></div>
   
 <% else %>
   <div id="link"><i class="fa fa-user-circle-o fa-1.5x" >&nbsp;</i><%= link_to '登录', login_path,class: "btn",id: "btn" %></div>
