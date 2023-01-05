@@ -9,6 +9,7 @@
   <p>
     <strong>商家名:</strong>
     <%= User.find_by("id",order.business_id).username %>
+    <%= order.business_id %>
   </p>
   <p>
     <strong>订单状态:</strong>
