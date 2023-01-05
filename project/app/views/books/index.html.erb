@@ -43,6 +43,9 @@
     <p>
       
       <%=button_to '选择下单', {:controller => :books, :action => 'bookneworder', :id => book.id}, :method => :get  , class: "linkpro",id: "linkpro"  %>
+      
+<%= link_to "编辑信息", edit_book_path(book) , class: "linkpro",id: "linkpro" %> 
+
 
     </p>
     </div>

@@ -1,10 +1,19 @@
-<h1>Editing book</h1>
+<table>
+<tr>
+<td id="tdpad">
+<i class="fa fa-list-ul fa-2x " ></i>
+</td>
+<td>
+<h2>编辑信息</h2>
+</td>
+<td>
+  <%= link_to "返回信息列表", books_path,class: "linkpro",id: "linkpro" %>
+</td>
+</tr>
+</table>
 
 <%= render "form", book: @book %>
 
 <br>
 
-<div>
-  <%= link_to "Show this book", @book %> |
-  <%= link_to "Back to books", books_path %>
-</div>
+  <%= button_to "Destroy this book", @book, method: :delete,class: "linkpro",id: "linkpro" %>
