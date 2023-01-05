@@ -5,7 +5,7 @@ Rails.application.routes.draw do
     resources :orderitems
     member do
     get 'alterstatus'
-    get 'bookneworder'
+
     end
   end
   resources :orderitems
@@ -19,6 +19,13 @@ Rails.application.routes.draw do
     get 'logout' => :destroy
   end
   
+    resources :books do
+    
+    member do
+    
+    get 'bookneworder'
+    end
+  end
 
 
 

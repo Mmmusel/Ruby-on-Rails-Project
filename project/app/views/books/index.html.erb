@@ -32,7 +32,7 @@
     <%= render book %>
     <p>
       <%= link_to "Show this book", book %>
-      <%=button_to '取消收藏', {:controller => :orders, :action => 'bookneworder', :bookid => book.id}, :method => :get  , class: "linkpro",id: "linkpro"  %>
+      <%=button_to '取消收藏', {:controller => :books, :action => 'bookneworder', :id => book.id}, :method => :get  , class: "linkpro",id: "linkpro"  %>
 
     </p>
   <% end %>
