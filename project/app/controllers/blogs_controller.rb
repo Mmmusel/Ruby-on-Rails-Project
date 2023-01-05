@@ -1,6 +1,6 @@
 class BlogsController < ApplicationController
   before_action :set_blog, only: %i[ show edit update destroy ]
-  before_action :authenticate, except: [:index, :show]
+  #before_action :authenticate, except: [:index, :show, :store]
 
 
   # GET /blogs or /blogs.json
@@ -9,9 +9,6 @@ class BlogsController < ApplicationController
   end
 
 
-  def store
-    @blogs = Blog.select('*').where({'blogs.user_id' => current_user.id})
-  end
   
  
 
