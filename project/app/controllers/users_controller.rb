@@ -44,6 +44,17 @@ class UsersController < ApplicationController
 
   # PATCH/PUT /users/1 or /users/1.json
   def update
+  
+  
+  if !User.select('*').where({'users.username' => user_params[:username]}).empty?
+    respond_to do |format|
+    format.html { redirect_to new_user_url, notice: "用户名重复" }
+       format.json { head :no_content }
+       end
+        return
+        end
+  
+  
     respond_to do |format|
       if @user.update(user_params)
         format.html { redirect_to user_url(@user), notice: "User was successfully updated." }
