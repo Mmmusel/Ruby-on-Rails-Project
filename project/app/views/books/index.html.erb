@@ -37,12 +37,15 @@
 
 
 
-<div id="books">
+
   <% @books.each do |book| %>
+  
+  
+  <div class="bookline" id="bookline">
   
   <% if book.user_id==current_user.id %>
   
-  <div id="bookline">
+
      <p>
     <strong>收货人姓名：</strong>
     <%= book.bookname %>
@@ -57,6 +60,8 @@
     <strong>收货人手机号：</strong>
     <%= book.bookmobile %>
   </p>
+  
+  
 <table>
 <tr>
 <td>
@@ -69,9 +74,11 @@
 </tr>
 </table>
 
+
+    
+      <% end %>
     </div>
-    </div>
-    <% end %>
+  
   <% end %>
-</div>
+
 
