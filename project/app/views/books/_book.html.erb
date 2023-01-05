@@ -1,5 +1,7 @@
 <div id="<%= dom_id book %>">
-
+<% if book.user_id==current_user.id %>
+  
+  <div id="bookline">
   <p>
     <strong>收货人姓名：</strong>
     <%= book.bookname %>
@@ -14,6 +16,23 @@
     <strong>收货人手机号：</strong>
     <%= book.bookmobile %>
   </p>
+  
+  
+  <table>
+<tr>
+<td>
+<%= link_to "编辑信息", edit_book_path(book) , class: "linkpro",id: "linkpro" %> 
+    </td>
+    <td>  
+    
+  <%= button_to "删除信息", @book, method: :delete,class: "linkpro",id: "linkpro" %>
+
+</td>
+</tr>
+</table>
+
+    </div>
+    <% end %>
   
   
 
