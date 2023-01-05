@@ -6,7 +6,7 @@
 </td>
 <td>
 
-<% if current_user.usertype=='user' %>
+<% if current_user.usertype!='user' %>
 <h1>商品展示</h1>
 <% else %>
 <h1>商家展示</h1>
