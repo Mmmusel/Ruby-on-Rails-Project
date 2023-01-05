@@ -39,10 +39,10 @@ Rails.application.routes.draw do
   # resources :comments
   resources :blogs do
     resources :comments
-    member do
-    get 'store'
+    
+    get 'store' => :store
 
-    end
+    
   end
 
   resources :comments
