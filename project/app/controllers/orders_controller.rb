@@ -163,6 +163,9 @@ if t=='未付款' then
   # DELETE /orders/1 or /orders/1.json
   def destroy
    # @order.destroy
+   
+   if @order.order_status!='已删除并退款'
+   
     @order.order_status='已删除并退款'
     @order.save
 
@@ -180,6 +183,20 @@ if t=='未付款' then
         format.json { render json: @order.errors, status: :unprocessable_entity }
       end
     end
+    
+    
+    else
+       @order.destroy
+    
+    
+      respond_to do |format|
+      format.html { redirect_to orders_url, notice: "Order was successfully destroyed." }
+      format.json { head :no_content }
+    end
+    
+    end
+    
+    
   end
 
   private
