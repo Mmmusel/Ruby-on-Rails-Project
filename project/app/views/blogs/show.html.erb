@@ -11,7 +11,11 @@
 </td>
 
 <td>
-<div id="linkpro"><%= link_to '返回', blogs_path,class: "btnpro",id: "btnpro" %></div></br>
+<div id="linkpro"><%= link_to '返回主页', blogs_path,class: "btnpro",id: "btnpro" %></div></br>
+</td>
+
+<td>
+<%= link_to "查看商家", store_path(User.find(blog.user_id)),id: "linkpro" %>
 </td>
 
 </tr>
