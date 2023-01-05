@@ -44,7 +44,7 @@ class UsersController < ApplicationController
 
 
   def store
-    #@blogs = Blog.select('*').where({'blogs.user_id' => @user.id})
+    @blogs = Blog.select('*').where({'blogs.user_id' => @user.id})
   end
   
 
