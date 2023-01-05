@@ -69,13 +69,11 @@
 </td>
 </tr>
 </table>
- <div id="books">
-  <%= render :partial => user.books %>
-  </div>
+
   
   <div class="books" id="books">
 <% user.books.each do |book| %>
-<div class="blog" id="blog">
+<div class="bookline" id="bookline">
 <%= render book %>
 </div>
    <% end %>
