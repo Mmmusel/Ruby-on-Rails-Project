@@ -9,6 +9,9 @@ class BlogsController < ApplicationController
   end
 
 
+  def store
+    @blogs = Blog.select('*').where({'blogs.user_id' => @user.id})
+  end
   
  
 
