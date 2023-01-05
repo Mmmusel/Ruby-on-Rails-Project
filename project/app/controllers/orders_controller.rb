@@ -51,8 +51,8 @@ k.each do |t|
   @order.business_id=t
   if !@order.save
   respond_to do |format|
-format.html { render :new, status: :unprocessable_entity }
-       format.json { render json: @order.errors, status: :unprocessable_entity }
+      format.html { redirect_to new_order_url, notice: "请检查信息填写完整，手机号格式正确" }
+      format.json { head :no_content }
        return
     end
   
