@@ -38,7 +38,7 @@ class OrderitemsController < ApplicationController
   def update
     respond_to do |format|
       if @orderitem.update(orderitem_params)
-        format.html { redirect_to orderitem_url(@orderitem), notice: "Orderitem was successfully updated." }
+        format.html { redirect_to carts_url, notice: "Orderitem was successfully updated." }
         format.json { render :show, status: :ok, location: @orderitem }
       else
         format.html { render :edit, status: :unprocessable_entity }
