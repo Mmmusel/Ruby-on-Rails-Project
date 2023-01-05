@@ -115,10 +115,10 @@ end
 
     respond_to do |format|
       if @book.save
-        format.html { redirect_to book_url(@book), notice: "Book was successfully created." }
+        format.html { notice: "Book was successfully created." }
         format.json { render :show, status: :created, location: @book }
       else
-        format.html { redirect_to new_order_url, notice: "请检查信息填写完整，手机号格式正确" }
+        format.html { redirect_to new_book_url, notice: "请检查信息填写完整，手机号格式正确" }
       format.json { head :no_content }
       end
     end
@@ -128,10 +128,10 @@ end
   def update
     respond_to do |format|
       if @book.update(book_params)
-        format.html { redirect_to book_url(@book), notice: "Book was successfully updated." }
+        format.html { notice: "Book was successfully updated." }
         format.json { render :show, status: :ok, location: @book }
       else
-        format.html { redirect_to new_order_url, notice: "请检查信息填写完整，手机号格式正确" }
+        format.html { redirect_to edit_book_url(@book), notice: "请检查信息填写完整，手机号格式正确" }
       format.json { head :no_content }
       end
     end
