@@ -1,5 +1,5 @@
 class BlogsController < ApplicationController
-  before_action :set_blog, only: %i[ show edit update destroy ]
+  before_action :set_blog, only: %i[ show edit update destroy store ]
   #before_action :authenticate, except: [:index, :show, :store]
 
 
