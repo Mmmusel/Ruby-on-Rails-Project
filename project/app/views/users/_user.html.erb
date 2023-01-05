@@ -72,6 +72,14 @@
  <div id="books">
   <%= render :partial => user.books %>
   </div>
+  
+  <div class="books" id="books">
+<% @books.each do |book| %>
+
+<%= render book %>
+
+   <% end %>
+    </div>
   <% end %>
   
 
