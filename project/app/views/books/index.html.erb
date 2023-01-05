@@ -18,10 +18,18 @@
 
 
 
-<%= link_to "新建信息", new_order_path,class: "linkpro",id: "linkpro" %>
+<%= link_to "新建信息", new_book_path,class: "linkpro",id: "linkpro" %>
 
 </td>
+<td>
 
+<div style="height:55px;">
+
+
+
+<%= link_to "回购物车", carts_path,class: "linkpro",id: "linkpro" %>
+
+</td>
 </tr>
 </table>
 
@@ -31,11 +39,10 @@
   <% @books.each do |book| %>
     <%= render book %>
     <p>
-      <%= link_to "Show this book", book %>
-      <%=button_to '取消收藏', {:controller => :books, :action => 'bookneworder', :id => book.id}, :method => :get  , class: "linkpro",id: "linkpro"  %>
+      
+      <%=button_to '选择下单', {:controller => :books, :action => 'bookneworder', :id => book.id}, :method => :get  , class: "linkpro",id: "linkpro"  %>
 
     </p>
   <% end %>
 </div>
 
-<%= link_to "New book", new_book_path %>
