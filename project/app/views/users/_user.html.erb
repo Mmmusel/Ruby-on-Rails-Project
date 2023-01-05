@@ -13,5 +13,24 @@
     <strong>Password:</strong>
     <%= user.usertype %>
   </p>
+  
+  
+  
+ <% if user.usertype=='user' %> 
+  <table>
+<tr>
+<td id="tdpad">
+<i class="fa fa-comments-o fa-3x " ></i>
+</td>
+<td>
+<h1>评价展示</h1>
+</td>
+</tr>
+</table>
+ <div id="books">
+  <%= render :partial => user.books %>
+  </div>
+  <% end %>
+  
 
 </div>
