@@ -38,11 +38,11 @@ background-size:cover;
 #left-panel {
   float: top;
  height:100%;
- width: 200px;/*设置按钮高度*/
+ width: 220px;/*设置按钮高度*/
 overflow: hidden;
 background-size:cover;
 
-  padding-left: 30px;
+  padding-left: 40px;
    padding-top: 28px;
   background-color:#DFE7EA
 }
