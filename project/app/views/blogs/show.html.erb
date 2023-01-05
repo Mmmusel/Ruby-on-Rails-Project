@@ -22,7 +22,12 @@
 </table>
 <table>
 <tr>
-<td><%= render @blog %></td>
+<td><%= render @blog %>
+</br>
+  <strong>商品描述:</strong>
+    <%= blog.content %>
+  
+</td>
   <% if @blog.user_id==session[:user_id] %>
   <td id="tdpadsmall">
     <div id="linkpro"> <%= link_to '编辑商品', edit_blog_path(@blog), class: "btnpro",id: "btnpro"  %></div>
