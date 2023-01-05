@@ -53,6 +53,7 @@ k.each do |t|
   respond_to do |format|
 format.html { render :new, status: :unprocessable_entity }
        format.json { render json: @order.errors, status: :unprocessable_entity }
+       return
     end
   
   end
