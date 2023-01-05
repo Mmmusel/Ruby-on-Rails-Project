@@ -40,12 +40,17 @@
   
   <div id="bookline">
     <%= render book %>
-    <div id="pic">
+<table>
+<tr>
+<td>
       
       <%=button_to '选择下单', {:controller => :books, :action => 'bookneworder', :id => book.id}, :method => :get  , class: "linkpro",id: "linkpro"  %>
-      
+    </td>
+    <td>  
 <%= link_to "编辑信息", edit_book_path(book) , class: "linkpro",id: "linkpro" %> 
-
+</td>
+</tr>
+</table>
 
     </div>
     </div>
