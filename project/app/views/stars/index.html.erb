@@ -24,7 +24,7 @@
 <tr>
 <td>
         <%= link_to '查看商品', Blog.find_by("id",star.blog_id), class: "linkpro",id: "linkpro" %>
-        </tr>
+        </td>
      <td>  
         <%=button_to '取消收藏', {:controller => :stars, :action => 'destroy', :id => star.id}, :method => :delete  , class: "linkpro",id: "linkpro"  %>
         </td>
