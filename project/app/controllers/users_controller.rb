@@ -22,6 +22,12 @@ class UsersController < ApplicationController
   # POST /users or /users.json
   def create
     @user = User.new(user_params)
+    if !User.select('*').where({'users.username' => @user.username}).empty?
+    
+    format.html { redirect_to new_user_url, notice: "用户名重复" }
+       format.json { head :no_content }
+        return
+        end
 
     respond_to do |format|
       if @user.save
