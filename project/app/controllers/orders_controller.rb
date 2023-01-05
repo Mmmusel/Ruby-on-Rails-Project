@@ -66,7 +66,7 @@ k.each do |t|
 	    @orderitem.title=v.title
 	    @orderitem.save
 	    
-	    @tmpblogc=Blog.find_by("id",v.deleid)
+	    @tmpblogc=Blog.find(v.deleid)
 	    @tmpblogc.stock=@tmpblogc.stock-v.num
 	    @tmpblogc.save
 	
@@ -118,7 +118,7 @@ end
   end
   
   def alterstatus
-  @order=Order.find_by("id",params[:id])
+  @order=Order.find(params[:id])
   t=@order.order_status
   
   
