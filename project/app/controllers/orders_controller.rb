@@ -53,8 +53,9 @@ k.each do |t|
   respond_to do |format|
       format.html { redirect_to new_order_url, notice: "请检查信息填写完整，手机号格式正确" }
       format.json { head :no_content }
-       return
+       
     end
+    return
   
   end
   
