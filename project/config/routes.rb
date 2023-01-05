@@ -1,9 +1,11 @@
 Rails.application.routes.draw do
+  resources :books
   
   resources :orders do
     resources :orderitems
     member do
     get 'alterstatus'
+    get 'bookneworder'
     end
   end
   resources :orderitems

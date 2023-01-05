@@ -1,0 +1,41 @@
+<p style="color: green"><%= notice %></p>
+
+<p style="color: green"><%= notice %></p>
+
+
+<table>
+<tr>
+<td id="tdpad">
+<i class="fa fa-shopping-cart fa-3x " ></i>
+</td>
+<td>
+
+<h1>选择收货人信息</h1>
+</td>
+<td>
+
+<div style="height:55px;">
+
+
+
+<%= link_to "新建信息", new_order_path,class: "linkpro",id: "linkpro" %>
+
+</td>
+
+</tr>
+</table>
+
+
+
+<div id="books">
+  <% @books.each do |book| %>
+    <%= render book %>
+    <p>
+      <%= link_to "Show this book", book %>
+      <%=button_to '取消收藏', {:controller => :orders, :action => 'bookneworder', :bookid => book.id}, :method => :get  , class: "linkpro",id: "linkpro"  %>
+
+    </p>
+  <% end %>
+</div>
+
+<%= link_to "New book", new_book_path %>
