@@ -68,6 +68,7 @@ k.each do |t|
 	    
 	    @tmpblogc=Blog.find(v.deleid)
 	    @tmpblogc.stock=@tmpblogc.stock-v.num
+	    @tmpblogc.sales=@tmpblogc.sales+v.num
 	    @tmpblogc.save
 	
 	    tmpsum+=v.num*v.price

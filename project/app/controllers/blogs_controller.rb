@@ -25,6 +25,7 @@ class BlogsController < ApplicationController
   def create
     @blog = Blog.new(blog_params)
     @blog.user=current_user
+    @blog.sales=0
     
 
     respond_to do |format|
@@ -80,6 +81,6 @@ class BlogsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def blog_params
-      params.require(:blog).permit(:user_id, :title, :content, :price, :stock, :image)
+      params.require(:blog).permit(:user_id, :title, :content, :price, :stock, :image, :sales)
     end
 end
