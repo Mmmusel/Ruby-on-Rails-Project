@@ -136,7 +136,7 @@ if t=='未付款' then
   
   respond_to do |format|
       if @order.save
-        format.html { redirect_to orders_url, notice: "Order was successfully updated." }
+        format.html { redirect_to orders_url, notice: "订单状态修改成功" }
         format.json { render :show, status: :ok, location: @order }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -158,7 +158,7 @@ if t=='未付款' then
     
     respond_to do |format|
       if @order.save
-        format.html { redirect_to order_url(@order), notice: "Order was successfully updated." }
+        format.html { redirect_to orders_url, notice: "商品已成功删除并退款" }
         format.json { render :show, status: :ok, location: @order }
       else
         format.html { render :edit, status: :unprocessable_entity }
