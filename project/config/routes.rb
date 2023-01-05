@@ -29,7 +29,9 @@ Rails.application.routes.draw do
     end
   end
 
-
+  controller :blogs do
+get 'store' => :store
+ end
 
   root :to => 'sessions#new'
 
@@ -40,7 +42,7 @@ Rails.application.routes.draw do
   resources :blogs do
     resources :comments
     
-    get 'store' => :store
+    
 
     
   end
