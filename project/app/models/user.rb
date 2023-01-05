@@ -4,9 +4,14 @@ class User < ApplicationRecord
   has_many :carts , :dependent => :destroy 
   has_many :star , :dependent => :destroy 
   
+
+  
   
   has_many :order,:dependent => :destroy 
   
+  
+  validates_presence_of :username
+  validates_presence_of :password
   
   def User.authenticate(name,password)
     if user=find_by("username":name)
