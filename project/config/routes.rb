@@ -19,6 +19,8 @@ Rails.application.routes.draw do
     get 'logout' => :destroy
   end
   
+  
+  
     resources :books do
     
     member do
@@ -37,6 +39,10 @@ Rails.application.routes.draw do
   # resources :comments
   resources :blogs do
     resources :comments
+    member do
+    get 'store'
+
+    end
   end
 
   resources :comments

@@ -1,0 +1,45 @@
+<p style="color: green"><%= notice %></p>
+<table>
+<tr>
+<td id="tdpad">
+<i class="fa fa-cubes fa-3x " ></i>
+</td>
+<td>
+
+<h1>商品展示</h1>
+</td>
+<td>
+ <% if current_user.usertype!='user' %>
+<div style="height:55px;">
+<div id="linkpro"><%= link_to '添加商品', new_blog_path, class: "btnpro",id: "btnpro"%></div></div>
+<% end %>
+</td>
+</td>
+</tr>
+</table>
+
+
+
+<div class="blogs" id="blogs">
+<% @blogs.each do |blog| %>
+<div class="blog" id="blog">
+
+  <%= render blog %>
+
+</br>
+
+   <div id="linkpro"><%= link_to '点击查看', blog, class: "btnpro",id: "btnpro" %></div>
+   <% if blog.user_id==session[:user_id] %>
+    <div id="linkpro"> <%= link_to '编辑商品', edit_blog_path(blog), class: "btnpro",id: "btnpro"  %>
+    
+   
+    </div>
+ <% end %>
+   
+</div>
+<% end %>
+</div>
+
+<br>
+
+
