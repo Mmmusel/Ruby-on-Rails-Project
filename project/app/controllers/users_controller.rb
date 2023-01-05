@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: %i[ show edit update destroy ]
+  before_action :set_user, only: %i[ show edit update destroy store ]
 
   # GET /users or /users.json
   def index
@@ -41,6 +41,12 @@ class UsersController < ApplicationController
       end
     end
   end
+
+
+  def store
+    @blogs = Blog.select('*').where({'blogs.user_id' => @user.id})
+  end
+  
 
   # PATCH/PUT /users/1 or /users/1.json
   def update

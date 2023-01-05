@@ -41,9 +41,7 @@ get 'store' => :store
   # resources :comments
   resources :blogs do
     resources :comments
-    
-    
-
+   
     
   end
 
@@ -51,6 +49,7 @@ get 'store' => :store
   resources :users do
   
     resources :books
+     get 'store' => :store
   end
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 

@@ -12,6 +12,8 @@ class BlogsController < ApplicationController
   def store
     @blogs = Blog.select('*').where({'blogs.user_id' => current_user.id})
   end
+  
+ 
 
   # GET /blogs/1 or /blogs/1.json
   def show
