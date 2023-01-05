@@ -1,5 +1,8 @@
 class BlogsController < ApplicationController
-  before_action :set_blog, only: %i[ show edit update destroy store ]
+  before_action :set_blog, only: %i[ show edit update destroy  ]
+  
+ 
+  
   #before_action :authenticate, except: [:index, :show, :store]
 
 
@@ -10,7 +13,7 @@ class BlogsController < ApplicationController
 
 
   def store
-    @blogs = Blog.select('*').where({'blogs.user_id' => @user.id})
+    @blogs = Blog.select('*').where({'blogs.user_id' => params[:format]})
   end
   
  
@@ -85,6 +88,9 @@ class BlogsController < ApplicationController
     def set_blog
       @blog = Blog.find(params[:id])
     end
+    
+  
+    
 
     # Only allow a list of trusted parameters through.
     def blog_params
