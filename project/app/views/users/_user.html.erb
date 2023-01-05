@@ -1,19 +1,48 @@
+
+
+
+
+
 <div id="<%= dom_id user %>">
+
+<table>
+<tr>
+<td id="tdpad">
+<i class="fa fa-shopping-cart fa-3x " ></i>
+</td>
+<td>
+
+<h1>个人信息</h1>
+</td>
+<td>
+
+<div style="height:55px;">
+
+
+
+<%= link_to "修改密码", edit_user_path(@user),id: "linkpro" %>
+
+</td>
+
+</tr>
+</table>
   <p>
-    <strong>Username:</strong>
+    <strong>用户名:</strong>
     <%= user.username %>
   </p>
-
-  <p>
-    <strong>Password:</strong>
-    <%= user.password %>
+ <% if user.usertype=='user' %> 
+ <p>
+    <strong>身份:</strong>买家
+   
   </p>
-  
-  <p>
-    <strong>Password:</strong>
-    <%= user.usertype %>
+ 
+ <% else %>
+ <p>
+    <strong>身份:</strong>商家
+    
   </p>
-  
+ 
+ <% end %>
   
   
  <% if user.usertype=='user' %> 
