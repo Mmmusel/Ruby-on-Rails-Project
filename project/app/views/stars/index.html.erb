@@ -20,11 +20,17 @@
   <div id="blog">
   
     <%= render Blog.find_by("id",star.blog_id) %>
-    <div id="picp">
+  <table>
+<tr>
+<td>
         <%= link_to '查看商品', Blog.find_by("id",star.blog_id), class: "linkpro",id: "linkpro" %>
-       
+        </tr>
+     <td>  
         <%=button_to '取消收藏', {:controller => :stars, :action => 'destroy', :id => star.id}, :method => :delete  , class: "linkpro",id: "linkpro"  %>
-    </div>
+        </td>
+</tr>
+</table>
+   
     </div>
   <% end %>
   
