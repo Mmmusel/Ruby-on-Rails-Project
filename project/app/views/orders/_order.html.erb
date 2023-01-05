@@ -89,12 +89,16 @@
    
    
    
-   
+   <% order.orderitem.each do |orderitem| %>
+<div class="x" id="x">
+<%= render orderitem %>
+</div>
+   <% end %>
    
     
     
    
-      <%= render :partial => order.orderitem %>
+     
 
  
 
