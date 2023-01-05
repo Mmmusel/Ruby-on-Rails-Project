@@ -49,7 +49,13 @@ k.each do |t|
   @order.user=current_user
   @order.order_status='未付款'
   @order.business_id=t
-  @order.save
+  if !@order.save
+  respond_to do |format|
+format.html { render :new, status: :unprocessable_entity }
+       format.json { render json: @order.errors, status: :unprocessable_entity }
+    end
+  
+  end
   
   tmpsum=0.0
   
