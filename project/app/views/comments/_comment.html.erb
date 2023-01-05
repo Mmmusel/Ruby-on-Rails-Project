@@ -6,7 +6,7 @@
 <td id="tdpadlinerr">
   
   <strong>
-    用户：<%= User.find_by("id":comment.user_id).username %>
+    用户：<%= User.find(comment.user_id).username %>
       
 </br> 发布时间：
     <%= comment.created_at %>

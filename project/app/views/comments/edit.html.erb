@@ -7,7 +7,7 @@
 <h2>编辑评价</h2>
 </td>
 <td>
-  <%= link_to "返回商品", Blog.find_by("id",@comment.blog_id),class: "linkpro",id: "linkpro" %>
+  <%= link_to "返回商品", Blog.find(@comment.blog_id),class: "linkpro",id: "linkpro" %>
 </td>
 </tr>
 </table>
